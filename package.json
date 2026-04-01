@@ -8,7 +8,9 @@
     "build": "ng build --configuration production",
     "build:dev": "ng build --configuration development",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "lint": "ng lint",
+    "lint:fix": "ng lint --fix"
   },
   "type": "module",
   "private": true,
@@ -40,13 +42,17 @@
     "zone.js": "~0.16.1"
   },
   "devDependencies": {
-    "@angular-eslint/schematics": "^21.3.1",
     "@angular/build": "^21.2.5",
     "@angular/cli": "^21.2.5",
     "@angular/compiler-cli": "^21.2.6",
+    "@eslint/js": "^10.0.1",
     "@types/leaflet": "^1.9.21",
     "@types/node": "^25.5.0",
+    "angular-eslint": "21.3.1",
     "autoprefixer": "^10.4.27",
+    "eslint": "^10.0.3",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "eslint-plugin-unused-imports": "^4.4.1",
     "jsdom": "^29.0.1",
     "postcss": "^8.5.8",
     "prettier": "^3.8.1",
@@ -54,6 +60,7 @@
     "tailwindcss": "^3.4.19",
     "ts-node": "^10.9.2",
     "typescript": "~5.9.3",
+    "typescript-eslint": "8.56.1",
     "vitest": "^4.1.2"
   }
 }

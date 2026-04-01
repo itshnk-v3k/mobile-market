@@ -3,7 +3,7 @@
   "version": 1,
   "cli": {
     "analytics": false,
-    "schematicCollections": ["@angular-eslint/schematics"],
+    "schematicCollections": ["angular-eslint", "@angular-eslint/schematics"],
     "cache": {
       "enabled": false
     }
@@ -114,6 +114,12 @@
         },
         "test": {
           "builder": "@angular/build:unit-test"
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+          }
         }
       }
     }
