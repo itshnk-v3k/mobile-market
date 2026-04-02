@@ -1,0 +1,74 @@
+:host {
+  @apply flex w-full flex-col gap-1.5;
+
+  .input-label {
+    @apply text-sm font-medium text-text-200;
+  }
+
+  &[data-disabled] {
+    .input-label {
+      @apply text-text-500;
+    }
+
+    .input-wrap {
+      @apply pointer-events-none opacity-50;
+    }
+  }
+
+  &[data-size='sm'] .input-wrap {
+    @apply h-8;
+  }
+
+  &[data-size='md'] .input-wrap {
+    @apply h-10;
+  }
+
+  &[data-size='lg'] .input-wrap {
+    @apply h-12;
+  }
+
+  .input-wrap {
+    @apply relative flex w-full items-center overflow-hidden rounded-lg border border-border-200 bg-surface-300 transition-all duration-200;
+
+    &:focus-within {
+      @apply border-border-active ring-2 ring-border-focus;
+    }
+
+    &.input-wrap-error {
+      @apply border-error-500;
+
+      &:focus-within {
+        @apply border-error-500 ring-2 ring-error-500/40;
+      }
+    }
+
+    input {
+      @apply w-full flex-1 bg-transparent px-3 text-sm text-text-100 placeholder:text-text-500;
+
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+      }
+    }
+  }
+
+  .input-slot {
+    @apply absolute flex h-full w-10 shrink-0 items-center justify-center text-text-500;
+
+    &.input-slot-start {
+      @apply left-0;
+    }
+
+    &.input-slot-end {
+      @apply right-0 transition-colors hover:text-text-300;
+    }
+  }
+
+  .input-hint {
+    @apply text-xs text-text-500;
+
+    &.input-hint-error {
+      @apply text-error-500;
+    }
+  }
+}

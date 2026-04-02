@@ -3,7 +3,7 @@
   "version": 1,
   "cli": {
     "analytics": false,
-    "schematicCollections": ["angular-eslint", "@angular-eslint/schematics"],
+    "schematicCollections": ["@schematics/angular", "@angular-eslint/schematics"],
     "cache": {
       "enabled": false
     }
@@ -16,7 +16,8 @@
         "@schematics/angular:component": {
           "style": "scss",
           "standalone": true,
-          "skipTests": true
+          "skipTests": true,
+          "type": "component"
         },
         "@schematics/angular:service": {
           "skipTests": true
@@ -41,7 +42,7 @@
       },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "m",
       "architect": {
         "build": {
           "builder": "@angular/build:application",

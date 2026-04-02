@@ -1,3 +1,138 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    height: 100%;
+    background-color: theme('colors.gray.1000');
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    height: 100%;
+    min-height: 100%;
+    color: theme('colors.text.100');
+  }
+
+  * {
+    box-sizing: border-box;
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.gray.800') transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: theme('colors.gray.800');
+    border-radius: 4px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  span {
+    margin: 0;
+    padding: 0;
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  ul,
+  ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  li {
+    margin: 0;
+    padding: 0;
+  }
+
+  button:not([disabled]) {
+    cursor: pointer;
+  }
+
+  a,
+  button {
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  a:focus,
+  button:focus {
+    outline: none;
+  }
+
+  button::-moz-focus-inner {
+    border: 0;
+  }
+
+  input,
+  textarea,
+  select {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    font: inherit;
+    color: inherit;
+    outline: none;
+    border-radius: 0;
+  }
+
+  textarea {
+    resize: none;
+  }
+
+  img,
+  svg {
+    height: auto;
+    display: block;
+  }
+
+  ::selection {
+    background-color: theme('colors.green.500');
+    color: theme('colors.text.inverse');
+  }
+}

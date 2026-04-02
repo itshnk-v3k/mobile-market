@@ -1,0 +1,30 @@
+<div class="flex h-[100px] flex-wrap gap-4 p-8">
+  <button mButton variant="primary" [view]="'content'" size="md">Primary</button>
+  <button mButton variant="secondary" [view]="'content'" size="md">Secondary</button>
+  <button mButton variant="outline" [view]="'content'" size="md">Outline</button>
+  <button mButton variant="ghost" [view]="'content'" size="md">Ghost</button>
+  <button mButton variant="danger" [view]="'content'" size="md">Danger</button>
+  <button mButton [loading]="true" [view]="'content'" size="md">Loading</button>
+  <button mButton [disabled]="true" [view]="'content'" size="md">Disabled</button>
+</div>
+
+<form [formGroup]="form" class="flex max-w-sm flex-col gap-4 p-8">
+  <m-input
+    label="Email"
+    type="email"
+    placeholder="example@mail.com"
+    hint="Мы не передаём данные третьим лицам"
+    formControlName="email" />
+
+  <m-input
+    label="Пароль"
+    type="password"
+    placeholder="Минимум 8 символов"
+    formControlName="password" />
+
+  <m-input label="Телефон" type="tel" mask="+7 (000) 000-00-00" formControlName="phone">
+    <span start>+7</span>
+  </m-input>
+
+  <button mButton [view]="'content'" variant="primary" type="submit">Отправить</button>
+</form>

@@ -1,0 +1,13 @@
+@if (loading()) {
+  <m-btn-loader [size]="iconSize()" />
+}
+
+@if (isContent()) {
+  <span>
+    <ng-content />
+  </span>
+}
+
+<!-- @if (isIconOnly()) {
+  <ng-content />
+} -->
