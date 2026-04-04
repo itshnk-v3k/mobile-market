@@ -1,0 +1,18 @@
+<label class="radio-label" [attr.data-position]="labelPosition()">
+  <button
+    type="button"
+    role="radio"
+    class="radio-box"
+    [id]="id()"
+    [attr.aria-checked]="checked()"
+    [disabled]="disabled()"
+    (click)="onToggle()">
+    @if (checked()) {
+      <span class="radio-dot"></span>
+    }
+  </button>
+
+  <span class="radio-text">
+    <ng-content />
+  </span>
+</label>

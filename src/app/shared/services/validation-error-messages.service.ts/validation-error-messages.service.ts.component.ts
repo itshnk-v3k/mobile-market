@@ -14,7 +14,8 @@ export enum ValidationError {
   InvalidPhone = 'invalidPhone',
 }
 
-type ErrorMessage = string | ((error: unknown) => string);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type ErrorMessage = string | ((error: any) => string);
 
 const ERROR_MESSAGES: Partial<Record<ValidationError, ErrorMessage>> = {
   [ValidationError.Required]: 'Поле обязательно для заполнения',
@@ -23,10 +24,10 @@ const ERROR_MESSAGES: Partial<Record<ValidationError, ErrorMessage>> = {
   [ValidationError.Mask]: 'Неверный формат',
   [ValidationError.MustMatch]: 'Пароли не совпадают',
   [ValidationError.InvalidPhone]: 'Введите корректный номер телефона',
-  [ValidationError.MinLength]: (e: any) => `Минимум ${e.requiredLength} символов`,
-  [ValidationError.MaxLength]: (e: any) => `Максимум ${e.requiredLength} символов`,
-  [ValidationError.Min]: (e: any) => `Минимальное значение: ${e.min}`,
-  [ValidationError.Max]: (e: any) => `Максимальное значение: ${e.max}`,
+  [ValidationError.MinLength]: e => `Минимум ${e.requiredLength} символов`,
+  [ValidationError.MaxLength]: e => `Максимум ${e.requiredLength} символов`,
+  [ValidationError.Min]: e => `Минимальное значение: ${e.min}`,
+  [ValidationError.Max]: e => `Максимальное значение: ${e.max}`,
 };
 
 @Injectable({ providedIn: 'root' })

@@ -1,0 +1,24 @@
+<label class="checkbox-label" [attr.data-disabled]="disabledState() || null">
+  <button
+    type="button"
+    role="checkbox"
+    class="checkbox-box"
+    [id]="id()"
+    [attr.data-form]="form()"
+    [attr.data-checked]="isChecked()"
+    [attr.aria-checked]="ariaChecked()"
+    [disabled]="disabledState()"
+    (click)="onToggle()">
+    @if (isChecked()) {
+      <lucide-icon [name]="iconName()" [size]="iconSize()" />
+    }
+  </button>
+
+  @if (label()) {
+    <span class="checkbox-text">
+      {{ label() }}
+    </span>
+  } @else {
+    <ng-content />
+  }
+</label>

@@ -1,0 +1,87 @@
+:host {
+  @apply inline-flex w-fit;
+
+  &[data-disabled] .switch-label {
+    @apply pointer-events-none cursor-default opacity-40;
+  }
+
+  &[data-size='sm'] .switch-button {
+    @apply h-5 w-9 px-0.5;
+
+    &::before {
+      @apply size-4;
+      left: 2px;
+    }
+    &[data-state='checked']::before {
+      left: 18px;
+    }
+  }
+
+  &[data-size='md'] .switch-button {
+    @apply h-6 w-11 px-[3px];
+
+    &::before {
+      @apply size-[18px];
+      left: 3px;
+    }
+    &[data-state='checked']::before {
+      left: 23px;
+    }
+  }
+
+  &[data-size='lg'] .switch-button {
+    @apply h-7 w-14 px-1;
+
+    &::before {
+      @apply size-5;
+      left: 4px;
+    }
+    &[data-state='checked']::before {
+      left: 32px;
+    }
+  }
+
+  .switch-label {
+    @apply flex cursor-pointer select-none items-center gap-2;
+  }
+
+  .switch-button {
+    @apply relative flex items-center rounded-full transition-colors duration-200 ease-in-out;
+
+    &::before {
+      content: '';
+      @apply absolute rounded-full bg-text-500 shadow-sm transition-all duration-200 ease-in-out;
+    }
+
+    &:focus-visible {
+      @apply outline-none ring-2 ring-border-focus;
+    }
+
+    &:disabled {
+      @apply pointer-events-none;
+    }
+
+    &[data-state='unchecked'] {
+      @apply border border-border-200 bg-surface-50;
+
+      &:hover {
+        @apply border-border-50;
+      }
+    }
+
+    &[data-state='checked'] {
+      @apply border border-green-500 bg-green-500;
+
+      &::before {
+        @apply bg-white;
+      }
+      &:hover {
+        @apply border-green-400 bg-green-400;
+      }
+    }
+  }
+
+  .switch-text {
+    @apply text-sm leading-none text-text-200;
+  }
+}

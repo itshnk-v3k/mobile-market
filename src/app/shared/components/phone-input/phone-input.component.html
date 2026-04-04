@@ -1,0 +1,82 @@
+@if (label()) {
+  <label [for]="id()" class="phone-label">
+    {{ label() }}
+  </label>
+}
+
+<div [class]="wrapClasses()" (focusout)="onFocusOut($event)">
+  <button
+    type="button"
+    class="phone-trigger"
+    [disabled]="disabled() || disabledState() || readonly()"
+    (click)="toggleDropdown()">
+    <span class="phone-flag">
+      {{ selectedCountry().flag }}
+    </span>
+
+    <lucide-icon
+      name="chevron-down"
+      [size]="14"
+      class="phone-chevron"
+      [class.rotate-180]="dropdownOpen()" />
+  </button>
+
+  <div class="phone-divider"></div>
+
+  <input
+    #inputRef
+    [id]="id()"
+    type="tel"
+    [mask]="currentMask()"
+    [dropSpecialCharacters]="false"
+    [disabled]="disabled() || disabledState()"
+    [readonly]="readonly()"
+    [placeholder]="currentPlaceholder()"
+    [ngModel]="value()"
+    (input)="onInputChange($event)"
+    (blur)="onBlur()" />
+
+  <div class="phone-suffix">
+    <lucide-icon name="phone" [size]="16" />
+  </div>
+
+  @if (dropdownOpen()) {
+    <div class="phone-dropdown">
+      @for (country of countries; track country.code) {
+        <button
+          type="button"
+          class="phone-dropdown-item"
+          [class.active]="selectedCountry().code === country.code"
+          (click)="selectCountry(country)">
+          <span class="phone-flag">
+            {{ country.flag }}
+          </span>
+
+          <span class="phone-dropdown-name">
+            {{ country.name }}
+          </span>
+
+          <span class="phone-dropdown-code">
+            {{ country.phoneCode }}
+          </span>
+
+          <span class="phone-check-wrap">
+            @if (selectedCountry().code === country.code) {
+              <lucide-icon name="check" [size]="14" class="phone-check" />
+            }
+          </span>
+        </button>
+      }
+    </div>
+  }
+</div>
+
+@if (control?.touched && control?.invalid) {
+  <span class="phone-hint phone-hint-error">
+    {{ validationErrorMessage.getError(control) }}
+  </span>
+} @else if (hint()) {
+  <span class="phone-hint">
+    {{ hint() }}
+  </span>
+}

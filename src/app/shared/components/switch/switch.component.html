@@ -1,0 +1,18 @@
+<label class="switch-label" [attr.data-disabled]="disabledState() || null">
+  <button
+    type="button"
+    role="switch"
+    class="switch-button"
+    [id]="id()"
+    [attr.data-state]="state()"
+    [attr.aria-checked]="ariaChecked()"
+    [attr.aria-label]="label() || 'switch'"
+    [disabled]="disabledState()"
+    (click)="onToggle()"></button>
+
+  @if (label()) {
+    <span class="switch-text">{{ label() }}</span>
+  } @else {
+    <ng-content />
+  }
+</label>

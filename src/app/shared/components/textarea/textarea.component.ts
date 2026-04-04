@@ -3,8 +3,6 @@ import type {
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
-  contentChild,
   DestroyRef,
   forwardRef,
   inject,
@@ -15,87 +13,67 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import type {
-  ControlValueAccessor,
-  FormControl,
   FormControlName} from '@angular/forms';
 import {
+  type ControlValueAccessor,
+  type FormControl,
   FormGroupDirective,
   FormsModule,
   NG_VALUE_ACCESSOR,
   NgControl,
 } from '@angular/forms';
 import { ValidationErrorMessagesService } from '@shared/services/validation-error-messages.service.ts/validation-error-messages.service.ts.component';
-import { generateId, mergeClasses } from '@shared/utils/merge-classes';
-import { LucideAngularModule } from 'lucide-angular';
+import { generateId } from '@shared/utils/merge-classes';
 import { NgxMaskDirective } from 'ngx-mask';
 
-export type InputType = 'text' | 'email' | 'password' | 'tel' | 'number' | 'search';
-export type InputSize = 'sm' | 'md' | 'lg';
-type InputStatus = 'base' | 'error';
+type TextareaStatus = 'base' | 'error';
 
 @Component({
-  selector: 'm-input',
-  templateUrl: './input.component.html',
-  styleUrl: './input.component.scss',
+  selector: 'm-textarea',
+  templateUrl: './textarea.component.html',
+  styleUrl: './textarea.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormsModule, NgxMaskDirective, LucideAngularModule],
+  imports: [FormsModule, NgxMaskDirective],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => InputComponent),
+      useExisting: forwardRef(() => TextareaComponent),
       multi: true,
     },
   ],
   host: {
-    '[attr.data-size]': 'size()',
-    '[attr.data-status]': 'inputStatus()',
     '[attr.data-disabled]': 'disabledState() || null',
+    '[attr.data-status]': 'inputStatus()',
   },
 })
-export class InputComponent implements ControlValueAccessor, OnInit {
+export class TextareaComponent implements ControlValueAccessor, OnInit {
   private readonly destroyRef = inject(DestroyRef);
   private readonly injector = inject(Injector);
   readonly validationErrorMessage = inject(ValidationErrorMessagesService);
 
-  private readonly startSlot = contentChild('start');
-
-  readonly id = input(generateId('input'));
-  readonly type = input<InputType>('text');
-  readonly size = input<InputSize>('md');
-  readonly mask = input('');
+  readonly id = input(generateId('textarea'));
   readonly label = input('');
   readonly placeholder = input('');
   readonly hint = input('');
-  readonly defaultValue = input('');
+  readonly rows = input(3);
+  readonly mask = input('');
   readonly disabled = input(false);
   readonly readOnly = input(false);
-  readonly autocomplete = input('off');
-
-  readonly hasStartSlot = computed(() => !!this.startSlot());
 
   readonly changed = output<string>();
-  readonly focused = output<void>();
-
-  readonly inputStatus = signal<InputStatus>('base');
-  readonly showPassword = signal(false);
 
   protected readonly value = signal('');
   protected readonly disabledState = signal(false);
+  protected readonly inputStatus = signal<TextareaStatus>('base');
 
   public control: FormControl | null = null;
 
-  get inputType(): string {
-    if (this.type() !== 'password') return this.type();
-    return this.showPassword() ? 'text' : 'password';
-  }
-
-  protected readonly wrapClasses = computed(() =>
-    mergeClasses('input-wrap', this.inputStatus() === 'error' && 'input-wrap-error')
-  );
+   
+  private onChange: (v: string) => void = () => {};
+   
+  private onTouched: () => void = () => {};
 
   ngOnInit(): void {
-    this.value.set(this.defaultValue());
-
     const ngControl = this.injector.get(NgControl, null);
 
     if (ngControl) {
@@ -113,14 +91,11 @@ export class InputComponent implements ControlValueAccessor, OnInit {
     }
   }
 
-  private onChange: (value: string) => void = () => {};
-  private onTouched: () => void = () => {};
-
-  writeValue(value: string | null): void {
-    this.value.set(value ?? '');
+  writeValue(val: string | null): void {
+    this.value.set(val ?? '');
   }
 
-  registerOnChange(fn: (value: string) => void): void {
+  registerOnChange(fn: (v: string) => void): void {
     this.onChange = fn;
   }
 
@@ -139,9 +114,9 @@ export class InputComponent implements ControlValueAccessor, OnInit {
 
   protected onInputChange(event: Event): void {
     if (this.disabled()) return;
-    const val = (event.target as HTMLInputElement).value;
+    const val = (event.target as HTMLTextAreaElement).value;
     this.value.set(val);
-    this.onChange(this.value());
-    this.changed.emit(this.value());
+    this.onChange(val);
+    this.changed.emit(val);
   }
 }

@@ -1,0 +1,60 @@
+:host {
+  @apply flex items-center justify-center;
+
+  &[data-size='sm'] .loader {
+    @apply size-5;
+  }
+
+  &[data-size='md'] .loader {
+    @apply size-8;
+  }
+
+  &[data-size='lg'] .loader {
+    @apply size-12;
+  }
+
+  .loader {
+    animation: rotate 1.4s linear infinite;
+
+    .track {
+      fill: none;
+      stroke: theme('colors.surface.50');
+      stroke-width: 3;
+    }
+
+    .spinner {
+      fill: none;
+      stroke: theme('colors.green.500');
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-dasharray: 40 86;
+      stroke-dashoffset: 0;
+      animation: dash 1.4s ease-in-out infinite;
+      filter: drop-shadow(0 0 3px theme('colors.green.500'));
+    }
+  }
+
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes dash {
+    0% {
+      stroke-dasharray: 8 118;
+      stroke-dashoffset: 0;
+    }
+    50% {
+      stroke-dasharray: 80 46;
+      stroke-dashoffset: -30;
+    }
+    100% {
+      stroke-dasharray: 8 118;
+      stroke-dashoffset: -126;
+    }
+  }
+}

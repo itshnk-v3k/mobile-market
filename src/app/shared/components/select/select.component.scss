@@ -1,0 +1,88 @@
+:host {
+  @apply flex w-full flex-col gap-1.5;
+
+  &[data-disabled] {
+    .select-label {
+      @apply text-text-500;
+    }
+
+    .select-trigger {
+      @apply pointer-events-none opacity-50;
+    }
+  }
+
+  &[data-size='sm'] .select-trigger {
+    @apply h-8 text-xs;
+  }
+
+  &[data-size='md'] .select-trigger {
+    @apply h-10 text-sm;
+  }
+
+  &[data-size='lg'] .select-trigger {
+    @apply h-12 text-sm;
+  }
+
+  .select-label {
+    @apply text-sm font-medium text-text-200;
+  }
+
+  .select-trigger {
+    @apply flex w-full items-center justify-between rounded-lg border border-border-200 bg-surface-300 px-3 text-text-100 transition-all duration-200;
+
+    &:hover {
+      @apply border-border-50;
+    }
+
+    &:focus-visible {
+      @apply border-border-active outline-none ring-2 ring-border-focus;
+    }
+  }
+
+  .select-value {
+    @apply truncate text-left;
+  }
+
+  .select-placeholder {
+    @apply text-text-500;
+  }
+
+  .select-chevron {
+    @apply shrink-0 text-text-500 transition-transform duration-200;
+
+    &.select-chevron-open {
+      @apply rotate-180;
+    }
+  }
+
+  .select-hint {
+    @apply text-xs text-text-500;
+  }
+}
+
+.select-dropdown {
+  @apply flex w-full flex-col gap-0.5 overflow-y-auto rounded-lg border border-border-200 bg-surface-200 p-1 shadow-xl;
+
+  scrollbar-width: thin;
+  scrollbar-color: theme('colors.gray.800') transparent;
+}
+
+.select-option {
+  @apply flex w-full items-center justify-between rounded-md px-3 py-2 text-sm text-text-200 transition-colors duration-150;
+
+  &:hover {
+    @apply bg-surface-50 text-text-100;
+  }
+
+  &[data-selected='true'] {
+    @apply text-green-400;
+
+    lucide-icon {
+      @apply text-green-400;
+    }
+  }
+
+  &[data-disabled] {
+    @apply pointer-events-none opacity-40;
+  }
+}

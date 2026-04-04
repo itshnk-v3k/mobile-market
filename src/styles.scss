@@ -1,3 +1,5 @@
+@use 'assets/styles/toast';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -126,7 +128,7 @@
   }
 
   img,
-  svg {
+  svg:not([data-sonner-icon]) {
     height: auto;
     display: block;
   }
@@ -134,5 +136,13 @@
   ::selection {
     background-color: theme('colors.green.500');
     color: theme('colors.text.inverse');
+  }
+
+  lucide-icon {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

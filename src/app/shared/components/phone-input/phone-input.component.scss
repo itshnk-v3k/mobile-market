@@ -1,0 +1,101 @@
+:host {
+  @apply flex w-full flex-col gap-1.5;
+
+  .phone-label {
+    @apply text-sm font-medium text-text-200;
+  }
+
+  &[data-disabled] {
+    .phone-label {
+      @apply text-text-500;
+    }
+
+    .phone-wrap {
+      @apply pointer-events-none opacity-50;
+    }
+  }
+
+  &[data-status='error'] .phone-wrap {
+    @apply border-error-500;
+
+    &:focus-within {
+      @apply border-error-500 ring-2 ring-error-500/40;
+    }
+  }
+
+  .phone-wrap {
+    @apply relative flex h-10 w-full items-center overflow-visible rounded-lg border border-border-200 bg-surface-300 transition-all duration-200;
+
+    &:focus-within {
+      @apply border-border-active ring-2 ring-border-focus;
+    }
+
+    &.phone-wrap-error {
+      @apply border-error-500;
+
+      &:focus-within {
+        @apply border-error-500 ring-2 ring-error-500/40;
+      }
+    }
+  }
+
+  .phone-trigger {
+    @apply flex h-full shrink-0 items-center gap-1 px-3 text-text-100 transition-colors hover:text-text-50;
+  }
+
+  .phone-flag {
+    @apply text-base leading-none;
+  }
+
+  .phone-chevron {
+    @apply text-text-500 transition-transform duration-200;
+  }
+
+  .phone-divider {
+    @apply h-5 w-px shrink-0 bg-border-200;
+  }
+
+  input {
+    @apply h-full flex-1 bg-transparent px-3 text-sm text-text-100 placeholder:text-text-500;
+  }
+
+  .phone-suffix {
+    @apply flex h-full w-10 shrink-0 items-center justify-center text-text-500;
+  }
+
+  .phone-check-wrap {
+    @apply flex w-4 shrink-0 items-center justify-center;
+
+    lucide-icon {
+      @apply text-green-500;
+    }
+  }
+
+  .phone-dropdown {
+    @apply absolute left-0 top-[calc(100%+6px)] z-50 max-h-60 w-full overflow-y-auto rounded-lg border border-border-200 bg-surface-200 py-1;
+  }
+
+  .phone-dropdown-item {
+    @apply flex w-full items-center gap-2 px-3 py-2 text-sm text-text-200 transition-colors hover:bg-surface-100 hover:text-text-100;
+
+    &.active {
+      @apply bg-surface-100 text-text-100;
+    }
+  }
+
+  .phone-dropdown-name {
+    @apply flex-1 text-left;
+  }
+
+  .phone-dropdown-code {
+    @apply w-10 text-right text-xs text-text-500;
+  }
+
+  .phone-hint {
+    @apply text-xs text-text-500;
+
+    &.phone-hint-error {
+      @apply text-error-500;
+    }
+  }
+}

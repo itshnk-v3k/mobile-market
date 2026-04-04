@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
-import type { ClassValue } from 'clsx';
 import { transform } from '@shared/utils/merge-classes';
+import type { ClassValue } from 'clsx';
+
 import { BtnLoaderComponent } from './btn-loader/btn-loader.component';
 
 type ButtonSize = 'sm' | 'md' | 'lg' | 'xl';
@@ -26,6 +27,7 @@ const ICON_SIZES: Record<ButtonSize, number> = {
 };
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'button[mButton], a[mButton]',
   templateUrl: './button.component.html',
   styleUrl: './button.component.scss',
@@ -52,6 +54,7 @@ export class ButtonComponent {
   readonly full = input<boolean>(false);
   readonly class = input<ClassValue>('');
 
+   
   readonly onClick = output<Event>();
 
   readonly isIconOnly = computed(() => this.view() === 'icon');
@@ -61,6 +64,7 @@ export class ButtonComponent {
 
   protected readonly onClickHandler = ($event: Event) => {
     if (!this.disabled() && !this.loading()) {
+       
       this.onClick.emit($event);
     }
   };

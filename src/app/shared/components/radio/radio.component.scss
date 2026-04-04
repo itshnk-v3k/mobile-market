@@ -1,0 +1,47 @@
+:host {
+  @apply inline-flex w-fit;
+
+  &[data-disabled] .radio-label {
+    @apply pointer-events-none cursor-default opacity-40;
+  }
+
+  .radio-label {
+    @apply flex cursor-pointer select-none items-center gap-2;
+
+    &[data-position='before'] {
+      @apply flex-row-reverse;
+    }
+  }
+
+  .radio-box {
+    @apply relative flex size-5 shrink-0 items-center justify-center rounded-full border border-border-200 bg-surface-300 leading-none transition-all duration-200;
+
+    &:hover {
+      @apply border-border-50 bg-surface-200;
+    }
+
+    &:focus-visible {
+      @apply border-border-active outline-none ring-2 ring-border-focus;
+    }
+
+    &[aria-checked='true'] {
+      @apply border-green-500 bg-green-500/10;
+
+      &:hover {
+        @apply border-green-400;
+      }
+    }
+
+    &:disabled {
+      @apply pointer-events-none;
+    }
+  }
+
+  .radio-dot {
+    @apply size-2 rounded-full bg-green-500;
+  }
+
+  .radio-text {
+    @apply text-sm leading-none text-text-200;
+  }
+}

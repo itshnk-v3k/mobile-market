@@ -1,0 +1,21 @@
+[data-sonner-toaster] {
+  --normal-bg: theme('colors.surface.200') !important;
+  --normal-border: theme('colors.border.200') !important;
+  --normal-text: theme('colors.text.100') !important;
+
+  --success-bg: theme('colors.surface.200') !important;
+  --success-border: theme('colors.green.800') !important;
+  --success-text: theme('colors.green.300') !important;
+
+  --error-bg: theme('colors.surface.200') !important;
+  --error-border: theme('colors.error.800') !important;
+  --error-text: theme('colors.error.300') !important;
+
+  --warning-bg: theme('colors.surface.200') !important;
+  --warning-border: theme('colors.warning.800') !important;
+  --warning-text: theme('colors.warning.300') !important;
+
+  --info-bg: theme('colors.surface.200') !important;
+  --info-border: theme('colors.info.800') !important;
+  --info-text: theme('colors.info.300') !important;
+}

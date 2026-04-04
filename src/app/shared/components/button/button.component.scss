@@ -20,7 +20,6 @@
     @apply w-full;
   }
 
-  /* Sizes — content */
   &[data-view='content'] {
     &[data-size='sm'] {
       @apply h-8 gap-2 px-4 text-sm;
@@ -39,7 +38,6 @@
     }
   }
 
-  /* Sizes — icon */
   &[data-view='icon'] {
     &[data-size='sm'] {
       @apply size-8;
@@ -58,7 +56,6 @@
     }
   }
 
-  /* Corners */
   &[data-corners='square'] {
     @apply rounded-lg;
   }
@@ -66,7 +63,6 @@
     @apply rounded-full;
   }
 
-  /* Variants */
   &[data-variant='primary'] {
     @apply border border-green-500 bg-green-500 text-text-inverse;
 

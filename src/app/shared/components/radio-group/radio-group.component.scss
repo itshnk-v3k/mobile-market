@@ -1,0 +1,11 @@
+:host {
+  @apply flex flex-col gap-2;
+
+  .radio-group-label {
+    @apply text-sm font-medium text-text-200;
+  }
+
+  .radio-group-options {
+    @apply flex flex-col gap-2;
+  }
+}

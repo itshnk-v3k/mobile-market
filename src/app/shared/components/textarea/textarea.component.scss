@@ -1,0 +1,47 @@
+:host {
+  @apply flex w-full flex-col gap-1.5;
+
+  &[data-disabled] {
+    .textarea-label {
+      @apply text-text-500;
+    }
+
+    .textarea-wrap {
+      @apply pointer-events-none opacity-50;
+    }
+  }
+
+  &[data-status='error'] .textarea-wrap {
+    @apply border-error-500;
+
+    &:focus-within {
+      @apply border-error-500 ring-2 ring-error-500/40;
+    }
+  }
+
+  .textarea-label {
+    @apply text-sm font-medium text-text-200;
+  }
+
+  .textarea-wrap {
+    @apply w-full overflow-hidden rounded-lg border border-border-200 bg-surface-300 transition-all duration-200;
+
+    &:focus-within {
+      @apply border-border-active ring-2 ring-border-focus;
+    }
+
+    textarea {
+      @apply min-h-[100px] w-full resize-y bg-transparent px-3 py-2.5 text-sm text-text-100 placeholder:text-text-500;
+      scrollbar-width: thin;
+      scrollbar-color: theme('colors.gray.800') transparent;
+    }
+  }
+
+  .textarea-hint {
+    @apply text-xs text-text-500;
+
+    &.textarea-hint-error {
+      @apply text-error-500;
+    }
+  }
+}

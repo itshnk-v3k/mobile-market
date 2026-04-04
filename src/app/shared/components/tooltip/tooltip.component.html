@@ -1,0 +1,19 @@
+<div class="tooltip-body">
+  @if (title()) {
+    <p class="tooltip-title">
+      {{ title() }}
+    </p>
+  }
+
+  @if (contentTemplate()) {
+    <ng-container [ngTemplateOutlet]="contentTemplate()" />
+  } @else if (content()) {
+    <span class="tooltip-content">
+      {{ content() }}
+    </span>
+  }
+</div>
+
+@if (isArrow()) {
+  <span class="tooltip-arrow"></span>
+}

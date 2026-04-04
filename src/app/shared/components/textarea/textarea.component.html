@@ -1,0 +1,26 @@
+@if (label()) {
+  <label [for]="id()" class="textarea-label">
+    {{ label() }}
+  </label>
+}
+
+<div class="textarea-wrap">
+  <textarea
+    [id]="id()"
+    [rows]="rows()"
+    [mask]="mask()"
+    [disabled]="disabledState() || disabled()"
+    [readonly]="readOnly()"
+    [placeholder]="placeholder()"
+    [ngModel]="value()"
+    (blur)="onBlur()"
+    (input)="onInputChange($event)"></textarea>
+</div>
+
+@if (control?.touched && control?.invalid) {
+  <span class="textarea-hint textarea-hint-error">
+    {{ validationErrorMessage.getError(control) }}
+  </span>
+} @else if (hint()) {
+  <span class="textarea-hint">{{ hint() }}</span>
+}

@@ -1,0 +1,63 @@
+:host {
+  @apply relative flex w-fit min-w-40 max-w-72;
+
+  .tooltip-body {
+    @apply relative z-10 flex flex-col gap-1.5 rounded-lg border border-border-200 bg-surface-200 shadow-xl;
+  }
+
+  .tooltip-title {
+    @apply text-sm font-medium text-text-100;
+  }
+
+  .tooltip-content {
+    @apply text-xs leading-relaxed text-text-400;
+  }
+
+  .tooltip-arrow {
+    @apply block size-2.5 shrink-0 rotate-45 border-border-200 bg-surface-200;
+  }
+
+  &[data-size='sm'] .tooltip-body {
+    @apply px-2.5 py-2 text-xs;
+  }
+
+  &[data-size='md'] .tooltip-body {
+    @apply px-3 py-2.5 text-sm;
+  }
+
+  &[data-size='lg'] .tooltip-body {
+    @apply px-4 py-3 text-sm;
+  }
+
+  &[data-position='top'] {
+    @apply flex-col items-center;
+
+    .tooltip-arrow {
+      @apply -mt-1.5 border-b border-l-0 border-r border-t-0;
+    }
+  }
+
+  &[data-position='bottom'] {
+    @apply flex-col-reverse items-center;
+
+    .tooltip-arrow {
+      @apply -mb-1.5 border-b-0 border-l border-r-0 border-t;
+    }
+  }
+
+  &[data-position='left'] {
+    @apply flex-row items-center;
+
+    .tooltip-arrow {
+      @apply -ml-1.5 border-b-0 border-l-0 border-r border-t;
+    }
+  }
+
+  &[data-position='right'] {
+    @apply flex-row-reverse items-center;
+
+    .tooltip-arrow {
+      @apply -mr-1.5 border-b border-l border-r-0 border-t-0;
+    }
+  }
+}

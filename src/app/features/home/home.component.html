@@ -1,4 +1,4 @@
-<div class="flex h-[100px] flex-wrap gap-4 p-8">
+<div class="flex h-fit flex-wrap gap-4 p-8">
   <button mButton variant="primary" [view]="'content'" size="md">Primary</button>
   <button mButton variant="secondary" [view]="'content'" size="md">Secondary</button>
   <button mButton variant="outline" [view]="'content'" size="md">Outline</button>
@@ -22,9 +22,109 @@
     placeholder="Минимум 8 символов"
     formControlName="password" />
 
-  <m-input label="Телефон" type="tel" mask="+7 (000) 000-00-00" formControlName="phone">
-    <span start>+7</span>
-  </m-input>
+  <m-phone-input label="Телефон" hint="Введите номер с кодом страны" formControlName="phone" />
+
+  <m-checkbox label="Запомнить меня" formControlName="remember" />
+
+  <m-checkbox formControlName="agree">
+    Я принимаю
+    <a href="#">условия</a>
+  </m-checkbox>
+
+  <m-checkbox [state]="'indeterminate'" label="Выбрать всё" />
+
+  <m-checkbox size="sm" form="circle" label="Маленький круглый" />
+  <m-checkbox size="lg" label="Большой" />
+
+  <m-select
+    label="Бренд"
+    placeholder="Выберите бренд"
+    formControlName="brand"
+    [options]="[
+      { label: 'Apple', value: 'apple' },
+      { label: 'Samsung', value: 'samsung' },
+      { label: 'Xiaomi', value: 'xiaomi' },
+    ]" />
+
+  <m-radio-group
+    label="Память"
+    formControlName="storage"
+    [options]="[
+      { label: '128 ГБ', value: '128' },
+      { label: '256 ГБ', value: '256' },
+      { label: '512 ГБ', value: '512', disabled: true },
+    ]" />
+
+  <m-radio-group label="Цвет" formControlName="color" [options]="colors" />
+
+  <m-switch label="Только в наличии" formControlName="inStock" />
+  <m-switch formControlName="notifications">Уведомления о скидках</m-switch>
+
+  <m-textarea
+    label="Сообщение"
+    placeholder="Опишите вашу проблему..."
+    hint="Минимум 10 символов"
+    formControlName="message" />
 
   <button mButton [view]="'content'" variant="primary" type="submit">Отправить</button>
 </form>
+
+<div class="flex h-fit flex-wrap gap-4 p-8">
+  <m-badge variant="new">Новый</m-badge>
+  <m-badge variant="sale">-15%</m-badge>
+  <m-badge variant="used">Б/у</m-badge>
+  <m-badge variant="hot">Хит</m-badge>
+  <m-badge variant="out-of-stock">Нет в наличии</m-badge>
+
+  <m-badge variant="sale" size="sm">-20%</m-badge>
+</div>
+
+<div class="flex h-fit flex-wrap gap-4 p-8">
+  <m-tag>128 ГБ</m-tag>
+  <m-tag>6 ГБ RAM</m-tag>
+  <m-tag>5G</m-tag>
+  <m-tag>NFC</m-tag>
+</div>
+
+<div class="flex h-fit flex-wrap gap-4 p-8">
+  <m-loader size="sm" />
+  <m-loader size="md" />
+  <m-loader size="lg" />
+</div>
+
+<div class="flex h-fit flex-wrap gap-4 p-8">
+  <m-switch label="Только в наличии" />
+  <m-switch>Уведомления о скидках</m-switch>
+  <m-switch size="sm" label="Маленький" />
+  <m-switch size="md" label="Средний" />
+  <m-switch size="lg" label="Большой" />
+</div>
+
+<div class="flex h-fit flex-wrap gap-4 p-8">
+  <m-textarea label="Комментарий" placeholder="Ваш отзыв..." [rows]="5" />
+</div>
+
+<div class="flex h-fit flex-wrap gap-4 p-8">
+  <button mButton mTooltip="Добавить в корзину">Купить</button>
+
+  <m-badge
+    variant="hot"
+    mTooltip="Товар популярен"
+    tooltipTitle="Хит продаж"
+    tooltipPosition="bottom"
+    tooltipSize="md">
+    Хит
+  </m-badge>
+
+  <lucide-icon
+    name="info"
+    mTooltip="Цена может измениться"
+    tooltipTrigger="click"
+    tooltipPosition="right" />
+
+  <ng-template #tpl>
+    <span class="text-green-400">Скидка 20%</span>
+  </ng-template>
+
+  <m-tag [tooltipTemplate]="tpl" mTooltip="">128 ГБ</m-tag>
+</div>
