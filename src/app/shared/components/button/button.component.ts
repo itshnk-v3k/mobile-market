@@ -3,6 +3,7 @@ import { transform } from '@shared/utils/merge-classes';
 import type { ClassValue } from 'clsx';
 
 import { BtnLoaderComponent } from './btn-loader/btn-loader.component';
+import { LucideAngularModule, LucideIconData } from 'lucide-angular';
 
 type ButtonSize = 'sm' | 'md' | 'lg' | 'xl';
 
@@ -31,7 +32,7 @@ const ICON_SIZES: Record<ButtonSize, number> = {
   selector: 'button[mButton], a[mButton]',
   templateUrl: './button.component.html',
   styleUrl: './button.component.scss',
-  imports: [BtnLoaderComponent],
+  imports: [BtnLoaderComponent, LucideAngularModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[attr.disabled]': 'disabled() || null',
@@ -53,8 +54,8 @@ export class ButtonComponent {
   readonly disabled = input(false, { transform });
   readonly full = input<boolean>(false);
   readonly class = input<ClassValue>('');
+  readonly icon = input<string | LucideIconData>('');
 
-   
   readonly onClick = output<Event>();
 
   readonly isIconOnly = computed(() => this.view() === 'icon');
@@ -64,7 +65,6 @@ export class ButtonComponent {
 
   protected readonly onClickHandler = ($event: Event) => {
     if (!this.disabled() && !this.loading()) {
-       
       this.onClick.emit($event);
     }
   };

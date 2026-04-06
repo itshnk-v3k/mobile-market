@@ -128,3 +128,45 @@
 
   <m-tag [tooltipTemplate]="tpl" mTooltip="">128 ГБ</m-tag>
 </div>
+
+<div class="flex h-fit flex-wrap gap-4 p-8">
+  <m-card-product
+    [product]="product"
+    [isFavorite]="wishlist().has(product.id)"
+    [isCompared]="compare().has(product.id)"
+    (addToCart)="onAddToCart($event)"
+    (toggleFavorite)="onToggleFavorite($event)"
+    (toggleCompare)="onToggleCompare($event)" />
+
+  <m-card-product [loading]="true" />
+
+  <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+    @for (product of products; track product.id) {
+      <m-card-product
+        [product]="product"
+        [isFavorite]="wishlist().has(product.id)"
+        [isCompared]="compare().has(product.id)"
+        (addToCart)="onAddToCart($event)"
+        (toggleFavorite)="onToggleFavorite($event)"
+        (toggleCompare)="onToggleCompare($event)" />
+    }
+
+    @if (loading) {
+      @for (i of [1, 2, 3, 4]; track i) {
+        <m-card-product [loading]="true" />
+      }
+    }
+  </div>
+
+  <div class="flex gap-3 overflow-x-auto">
+    @for (product of products; track product.id) {
+      <div class="w-[220px] shrink-0">
+        <m-card-product
+          [isFavorite]="wishlist().has(product.id)"
+          [isCompared]="compare().has(product.id)"
+          [product]="product"
+          [adaptive]="false" />
+      </div>
+    }
+  </div>
+</div>

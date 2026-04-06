@@ -1,0 +1,24 @@
+<div class="sheet-header">
+  <h2 class="sheet-title">Корзина</h2>
+
+  <button type="button" class="sheet-close" (click)="close()">
+    <lucide-icon name="x" [size]="20" />
+  </button>
+</div>
+
+<div class="sheet-body">
+  <div class="sheet-empty">
+    <lucide-icon name="shopping-cart" [size]="48" />
+    <p>Корзина пуста</p>
+    <span>Добавьте товары из каталога</span>
+  </div>
+</div>
+
+<div class="sheet-footer">
+  <div class="sheet-total">
+    <span>Итого</span>
+    <span class="sheet-total-price">0 ₽</span>
+  </div>
+
+  <button mButton variant="primary" [full]="true" [disabled]="true">Оформить заказ</button>
+</div>

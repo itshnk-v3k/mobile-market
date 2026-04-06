@@ -1,0 +1,165 @@
+:host {
+  @apply block w-full;
+}
+
+.footer {
+  @apply w-full border-t border-border-200 bg-surface-400;
+}
+
+// ─── Container ────────────────────────────────────────────────────────────────
+
+.footer-container {
+  @apply mx-auto grid max-w-container gap-10 px-4 md:px-6 lg:px-8;
+  grid-template-columns: 1fr;
+
+  @screen sm {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @screen lg {
+    grid-template-columns: 220px repeat(3, 1fr) 200px;
+    gap: 2rem;
+  }
+
+  @screen xl {
+    grid-template-columns: 240px repeat(3, 1fr) 220px;
+  }
+}
+
+// ─── Main section ─────────────────────────────────────────────────────────────
+
+.footer-main {
+  @apply py-12 md:py-16;
+}
+
+// ─── Brand ────────────────────────────────────────────────────────────────────
+
+.footer-brand {
+  @apply flex flex-col gap-4;
+
+  @screen sm {
+    grid-column: span 2;
+  }
+
+  @screen lg {
+    grid-column: span 1;
+  }
+}
+
+.footer-logo {
+  @apply flex w-fit items-center outline-none;
+}
+
+.logo-text {
+  @apply font-poppins text-xl font-bold tracking-tight text-text-100;
+  letter-spacing: -0.02em;
+}
+
+.logo-accent {
+  @apply text-green-500;
+}
+
+.footer-brand__desc {
+  @apply max-w-[220px] text-sm leading-relaxed text-text-500;
+}
+
+// ─── Socials ──────────────────────────────────────────────────────────────────
+
+.footer-socials {
+  @apply flex items-center gap-2;
+}
+
+.footer-social-btn {
+  @apply flex size-9 items-center justify-center rounded-xl text-text-500;
+  @apply border border-border-100 bg-surface-300;
+  @apply transition-all duration-200;
+
+  &:hover {
+    @apply border-green-500 text-green-500;
+    background: rgba(60, 186, 110, 0.08);
+  }
+
+  &:active {
+    transform: scale(0.92);
+  }
+}
+
+// ─── Columns ──────────────────────────────────────────────────────────────────
+
+.footer-col {
+  @apply flex flex-col gap-3;
+}
+
+.footer-col__title {
+  @apply text-sm font-semibold text-text-200;
+  letter-spacing: 0.02em;
+}
+
+.footer-col__list {
+  @apply flex flex-col gap-2;
+}
+
+.footer-col__link {
+  @apply w-fit text-sm text-text-500;
+  @apply transition-colors duration-150 hover:text-text-100;
+  @apply relative;
+
+  &::after {
+    content: '';
+    @apply absolute -bottom-px left-0 h-px w-0 bg-green-500;
+    @apply transition-all duration-200;
+  }
+
+  &:hover::after {
+    @apply w-full;
+  }
+}
+
+// ─── Contacts ─────────────────────────────────────────────────────────────────
+
+.footer-contacts {
+  @apply gap-5;
+}
+
+.footer-contact-group {
+  @apply flex flex-col gap-1;
+
+  &__label {
+    @apply text-xs font-medium uppercase tracking-wider text-text-600;
+  }
+
+  &__val {
+    @apply text-sm text-text-400 transition-colors duration-150 hover:text-green-500;
+  }
+}
+
+// ─── Bottom bar ───────────────────────────────────────────────────────────────
+
+.footer-bottom {
+  @apply border-t border-border-200 py-4;
+  background: theme('colors.surface.500');
+}
+
+.footer-bottom__inner {
+  @apply flex flex-col items-center gap-4 sm:flex-row sm:justify-between;
+}
+
+.footer-bottom__copy {
+  @apply text-xs text-text-600;
+}
+
+.footer-payments {
+  @apply flex items-center gap-2;
+}
+
+.footer-payment-badge {
+  @apply rounded-md border border-border-100 bg-surface-300 px-2.5 py-1 text-xs font-bold text-text-400;
+}
+
+.footer-bottom__links {
+  @apply flex items-center gap-4;
+}
+
+.footer-bottom__link {
+  @apply text-xs text-text-600 transition-colors duration-150 hover:text-text-200;
+}

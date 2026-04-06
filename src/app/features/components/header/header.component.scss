@@ -1,0 +1,188 @@
+:host {
+  @apply sticky top-0 z-40 w-full;
+  background: theme('colors.surface.500' / 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid theme('colors.border.200');
+  transition: box-shadow 0.25s ease;
+
+  &[data-scrolled] {
+    box-shadow:
+      0 1px 0 0 theme('colors.border.200'),
+      0 4px 24px 0 rgba(0, 0, 0, 0.35);
+  }
+}
+
+// ─── Layout ──────────────────────────────────────────────────────────────────
+
+.header-inner {
+  @apply mx-auto flex h-16 max-w-container items-center justify-between gap-4 px-4 md:px-6 lg:px-8;
+}
+
+// ─── Logo ─────────────────────────────────────────────────────────────────────
+
+.header-logo {
+  @apply flex shrink-0 items-center outline-none;
+}
+
+.logo-text {
+  @apply font-poppins text-xl font-bold tracking-tight text-text-100;
+  letter-spacing: -0.02em;
+}
+
+.logo-accent {
+  @apply text-green-500;
+}
+
+// ─── Nav ──────────────────────────────────────────────────────────────────────
+
+.header-nav {
+  @apply hidden flex-1 items-center justify-center gap-0.5 lg:flex;
+}
+
+.header-nav-link {
+  @apply relative rounded-lg px-3.5 py-2 text-sm font-medium text-text-400;
+  @apply transition-colors duration-200 hover:text-text-100;
+
+  &::after {
+    content: '';
+    @apply absolute bottom-1 left-1/2 h-0.5 w-4 rounded-full bg-green-500 opacity-0;
+    @apply transition-all duration-200;
+    transform: translateX(-50%) scaleX(0);
+    transform-origin: center;
+  }
+
+  &:hover::after {
+    @apply opacity-60;
+    transform: translateX(-50%) scaleX(1);
+  }
+
+  &.active {
+    @apply text-text-100;
+
+    &::after {
+      @apply opacity-100;
+      transform: translateX(-50%) scaleX(1);
+    }
+  }
+}
+
+// ─── Actions ──────────────────────────────────────────────────────────────────
+
+.header-actions {
+  @apply flex shrink-0 items-center gap-0.5;
+}
+
+.header-icon-btn {
+  @apply relative flex size-10 items-center justify-center rounded-xl;
+  @apply text-text-400 transition-all duration-200;
+  @apply hover:bg-surface-300 hover:text-text-100;
+
+  &:active {
+    transform: scale(0.93);
+  }
+}
+
+.header-badge {
+  @apply absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full;
+  @apply bg-green-500 px-1 text-[10px] font-bold text-white;
+  box-shadow: 0 0 0 2px theme('colors.surface.500');
+}
+
+.header-divider {
+  @apply mx-1 h-5 w-px bg-border-200 lg:hidden;
+}
+
+// ─── Burger ───────────────────────────────────────────────────────────────────
+
+.header-burger {
+  @apply flex size-10 flex-col items-center justify-center gap-[5px] rounded-xl;
+  @apply text-text-400 transition-all duration-200 hover:bg-surface-300 hover:text-text-100;
+  @apply lg:hidden;
+
+  &:active {
+    transform: scale(0.93);
+  }
+}
+
+.burger-line {
+  @apply block h-[2px] w-[18px] rounded-full bg-current;
+  transform-origin: center;
+  transition:
+    transform 0.25s ease,
+    opacity 0.2s ease,
+    width 0.25s ease;
+}
+
+.header-burger--open {
+  .burger-line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .burger-line:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  .burger-line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+}
+
+// ─── Mobile backdrop ──────────────────────────────────────────────────────────
+
+.mobile-backdrop {
+  @apply fixed inset-0 z-30 bg-black/50 lg:hidden;
+  animation: fadeIn 0.2s ease;
+}
+
+// ─── Mobile menu ──────────────────────────────────────────────────────────────
+
+.mobile-menu {
+  @apply border-t border-border-200 bg-surface-500 lg:hidden;
+  animation: slideDown 0.22s ease;
+}
+
+.mobile-nav-link {
+  @apply flex items-center justify-between px-4 py-3.5 text-sm font-medium;
+  @apply text-text-400 transition-colors duration-150 hover:bg-surface-300 hover:text-text-100;
+  @apply mx-4 my-0.5 rounded-xl;
+
+  &__arrow {
+    @apply text-text-500 transition-transform duration-150;
+  }
+
+  &:hover &__arrow {
+    transform: translateX(3px);
+  }
+
+  &.active {
+    @apply bg-surface-300 text-text-100;
+
+    .mobile-nav-link__arrow {
+      @apply text-green-500;
+    }
+  }
+}
+
+// ─── Animations ───────────────────────────────────────────────────────────────
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

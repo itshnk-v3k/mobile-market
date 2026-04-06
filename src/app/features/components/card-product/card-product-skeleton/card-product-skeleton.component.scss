@@ -1,0 +1,48 @@
+:host {
+  @apply block h-full;
+
+  .skeleton-wrap {
+    @apply flex h-full flex-col overflow-hidden rounded-2xl border border-border-200;
+  }
+
+  .skeleton-image {
+    @apply w-full bg-surface-300;
+    aspect-ratio: 1 / 1;
+  }
+
+  .skeleton-img {
+    @apply size-full rounded-none;
+  }
+
+  .skeleton-body {
+    @apply flex flex-1 flex-col gap-2 p-3;
+  }
+
+  .skeleton-name-1 {
+    @apply h-4 w-full;
+  }
+
+  .skeleton-name-2 {
+    @apply h-4 w-3/4;
+  }
+
+  .skeleton-tags {
+    @apply flex flex-wrap gap-1;
+  }
+
+  .skeleton-tag {
+    @apply h-5 w-14 rounded-md;
+  }
+
+  .skeleton-footer {
+    @apply mt-auto flex items-center justify-between;
+  }
+
+  .skeleton-price {
+    @apply h-6 w-24;
+  }
+
+  .skeleton-btn {
+    @apply size-8 rounded-lg;
+  }
+}

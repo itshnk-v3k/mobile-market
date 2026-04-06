@@ -1,0 +1,68 @@
+<header class="header-inner">
+  <a class="header-logo" [routerLink]="['/']" aria-label="Mobile Market">
+    <span class="logo-text">
+      <span class="logo-accent">M</span>
+      obile
+      <span class="logo-accent">M</span>
+      arket
+    </span>
+  </a>
+
+  <nav class="header-nav" aria-label="Основная навигация">
+    @for (item of navItems; track item.route) {
+      <a class="header-nav-link" [routerLink]="[item.route]" routerLinkActive="active">
+        {{ item.label }}
+      </a>
+    }
+  </nav>
+
+  <div class="header-actions">
+    <button type="button" class="header-icon-btn" aria-label="Поиск">
+      <lucide-icon name="search" [size]="20" />
+    </button>
+
+    <button type="button" class="header-icon-btn" aria-label="Избранное">
+      <lucide-icon name="heart" [size]="20" />
+      @if (wishlistCount()) {
+        <span class="header-badge">{{ wishlistCount() > 99 ? '99+' : wishlistCount() }}</span>
+      }
+    </button>
+
+    <button type="button" class="header-icon-btn" aria-label="Корзина" (click)="openCart()">
+      <lucide-icon name="shopping-cart" [size]="20" />
+      @if (cartCount()) {
+        <span class="header-badge">{{ cartCount() > 99 ? '99+' : cartCount() }}</span>
+      }
+    </button>
+
+    <div class="header-divider"></div>
+
+    <button
+      type="button"
+      class="header-burger"
+      [class.header-burger--open]="mobileMenuOpen()"
+      aria-label="Меню"
+      [attr.aria-expanded]="mobileMenuOpen()"
+      (click)="toggleMobileMenu()">
+      <span class="burger-line"></span>
+      <span class="burger-line"></span>
+      <span class="burger-line"></span>
+    </button>
+  </div>
+</header>
+
+@if (mobileMenuOpen()) {
+  <div class="mobile-backdrop" (click)="closeMobileMenu()" aria-hidden="true"></div>
+  <nav class="mobile-menu" aria-label="Мобильная навигация">
+    @for (item of navItems; track item.route) {
+      <a
+        class="mobile-nav-link"
+        [routerLink]="[item.route]"
+        routerLinkActive="active"
+        (click)="closeMobileMenu()">
+        <span class="mobile-nav-link__text">{{ item.label }}</span>
+        <lucide-icon name="chevron-right" [size]="16" class="mobile-nav-link__arrow" />
+      </a>
+    }
+  </nav>
+}

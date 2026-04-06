@@ -1,0 +1,7 @@
+:host {
+  @apply block overflow-hidden;
+
+  .skeleton {
+    @apply size-full animate-pulse rounded-lg bg-surface-50;
+  }
+}

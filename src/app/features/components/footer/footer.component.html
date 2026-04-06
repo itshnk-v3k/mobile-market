@@ -1,0 +1,82 @@
+<footer class="footer">
+  <div class="footer-main">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <a [routerLink]="['/']" class="footer-logo" aria-label="Mobile Market">
+          <span class="logo-text">
+            <span class="logo-accent">M</span>
+            obile
+            <span class="logo-accent">M</span>
+            arket
+          </span>
+        </a>
+        <p class="footer-brand__desc">Интернет-магазин мобильной техники и аксессуаров в Молдове</p>
+        <div class="footer-socials">
+          @for (social of socials; track social.label) {
+            <a
+              [href]="social.url"
+              class="footer-social-btn"
+              [attr.aria-label]="social.label"
+              target="_blank"
+              rel="noopener noreferrer">
+              <lucide-icon [name]="social.icon" [size]="18" />
+            </a>
+          }
+        </div>
+      </div>
+
+      <!-- Nav columns -->
+      @for (col of footerColumns; track col.title) {
+        <div class="footer-col">
+          <span class="footer-col__title">{{ col.title }}</span>
+          <ul class="footer-col__list">
+            @for (link of col.links; track link.label) {
+              <li>
+                <a
+                  class="footer-col__link"
+                  [routerLink]="link.route ? [link.route] : null"
+                  [href]="link.href ?? null">
+                  {{ link.label }}
+                </a>
+              </li>
+            }
+          </ul>
+        </div>
+      }
+
+      <!-- Contacts -->
+      <div class="footer-col footer-contacts">
+        <span class="footer-col__title">Контакты</span>
+        <div class="footer-contact-group">
+          <span class="footer-contact-group__label">Интернет-магазин</span>
+          <a href="tel:+37360782223" class="footer-contact-group__val">060 78 22 23</a>
+          <a href="mailto:sales@mobile.md" class="footer-contact-group__val">sales@mobile.md</a>
+        </div>
+        <div class="footer-contact-group">
+          <span class="footer-contact-group__label">Работа с клиентами</span>
+          <a href="tel:+37368088443" class="footer-contact-group__val">068 088 443</a>
+          <a href="mailto:support@mobile.md" class="footer-contact-group__val">support@mobile.md</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="footer-bottom">
+    <div class="footer-container footer-bottom__inner">
+      <span class="footer-bottom__copy">© 2024 Mobile Market. Все права защищены.</span>
+
+      <div class="footer-payments">
+        @for (pay of payments; track pay) {
+          <span class="footer-payment-badge">{{ pay }}</span>
+        }
+      </div>
+
+      <div class="footer-bottom__links">
+        <a [routerLink]="['/privacy']" class="footer-bottom__link">Конфиденциальность</a>
+        <a [routerLink]="['/terms']" class="footer-bottom__link">Условия</a>
+        <a [routerLink]="['/cookies']" class="footer-bottom__link">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>

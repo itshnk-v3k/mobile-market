@@ -1,0 +1,97 @@
+@if (loading()) {
+  <m-card-product-skeleton [adaptive]="adaptive()" />
+} @else if (product(); as p) {
+  <a class="card-link" [routerLink]="['/product', p.slug]" [attr.aria-label]="p.name">
+    <div class="card-image-wrap">
+      @if (p.image && !imageError()) {
+        <img class="card-image" [src]="p.image" [alt]="p.name" (error)="onImageError()" />
+      } @else {
+        <div class="card-image-placeholder">
+          <lucide-icon name="smartphone" [size]="52" />
+        </div>
+      }
+
+      @if (p.badge) {
+        <m-badge class="card-badge" [variant]="p.badge">
+          @switch (p.badge) {
+            @case ('sale') {
+              -{{ discount() }}%
+            }
+            @case ('new') {
+              Новинка
+            }
+            @case ('hot') {
+              Хит
+            }
+            @case ('used') {
+              Б/у
+            }
+            @case ('out-of-stock') {
+              Нет в наличии
+            }
+          }
+        </m-badge>
+      }
+
+      @if (p.credit) {
+        <m-badge class="card-credit" variant="new">{{ p.credit }}</m-badge>
+      }
+
+      <div class="card-actions">
+        <button
+          type="button"
+          class="card-action-btn"
+          [class.active-favorite]="isFavorite()"
+          (click)="onToggleFavorite($event)">
+          <lucide-icon name="heart" [size]="16" />
+        </button>
+
+        <button
+          type="button"
+          class="card-action-btn"
+          [class.active-compare]="isCompared()"
+          (click)="onToggleCompare($event)">
+          <lucide-icon name="scale" [size]="16" />
+        </button>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <p class="card-name">{{ p.name }}</p>
+
+      @if (p.tags?.length) {
+        <div class="card-tags">
+          @for (tag of p.tags; track tag.label) {
+            <m-tag>{{ tag.label }}</m-tag>
+          }
+        </div>
+      }
+
+      @if (p.cashback) {
+        <div class="card-cashback">
+          <span class="card-cashback-label">Cashback</span>
+          <m-badge variant="new">{{ p.cashback | number }} ₽</m-badge>
+        </div>
+      }
+
+      <div class="card-footer">
+        <div class="card-prices">
+          <span class="card-price">{{ p.price | number }} ₽</span>
+          @if (p.oldPrice) {
+            <span class="card-old-price">{{ p.oldPrice | number }} ₽</span>
+          }
+        </div>
+
+        @if (p.inStock) {
+          <button
+            mButton
+            [view]="'icon'"
+            icon="shopping-cart"
+            variant="primary"
+            size="sm"
+            (onClick)="onAddToCart($event)"></button>
+        }
+      </div>
+    </div>
+  </a>
+}
