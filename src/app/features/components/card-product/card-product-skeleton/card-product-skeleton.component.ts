@@ -5,8 +5,8 @@ import { SkeletonComponent } from '@shared/components/skeleton/skeleton.componen
   selector: 'm-card-product-skeleton',
   templateUrl: './card-product-skeleton.component.html',
   styleUrl: './card-product-skeleton.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [SkeletonComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[attr.data-adaptive]': 'adaptive() || null',
   },

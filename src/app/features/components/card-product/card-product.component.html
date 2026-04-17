@@ -1,94 +1,92 @@
 @if (loading()) {
   <m-card-product-skeleton [adaptive]="adaptive()" />
 } @else if (product(); as p) {
-  <a class="card-link" [routerLink]="['/product', p.slug]" [attr.aria-label]="p.name">
-    <div class="card-image-wrap">
+  <a class="card-product-link" [routerLink]="['/product', p.slug]" [attr.aria-label]="p.name">
+    <div class="card-product-image">
+      @if (p.badges?.length) {
+        <div class="card-product-badges">
+          @for (badge of p.badges; track badge.label) {
+            <m-badge [variant]="badge.variant" size="sm">{{ badge.label }}</m-badge>
+          }
+        </div>
+      }
+
+      <div class="card-product-actions">
+        <button
+          type="button"
+          class="card-product-action-btn card-product-favorite-btn"
+          [class.is-active]="isFavorite()"
+          [attr.aria-label]="isFavorite() ? 'Удалить из избранного' : 'Добавить в избранное'"
+          [attr.aria-pressed]="isFavorite()"
+          (click)="onToggleFavorite($event)">
+          <lucide-icon name="heart" [size]="18" aria-hidden="true" />
+        </button>
+
+        <button
+          type="button"
+          class="card-product-action-btn card-product-compare-btn"
+          [class.is-active]="isInCompare()"
+          [attr.aria-label]="isInCompare() ? 'Удалить из сравнения' : 'Добавить к сравнению'"
+          [attr.aria-pressed]="isInCompare()"
+          (click)="onToggleCompare($event)">
+          <lucide-icon name="scale" [size]="18" aria-hidden="true" />
+        </button>
+      </div>
+
       @if (p.image && !imageError()) {
-        <img class="card-image" [src]="p.image" [alt]="p.name" (error)="onImageError()" />
+        <img
+          class="card-product-image-src"
+          [src]="p.image"
+          [alt]="p.name"
+          loading="lazy"
+          (error)="onImageError()" />
       } @else {
-        <div class="card-image-placeholder">
+        <div class="card-product-image-placeholder" aria-hidden="true">
           <lucide-icon name="smartphone" [size]="52" />
         </div>
       }
-
-      @if (p.badge) {
-        <m-badge class="card-badge" [variant]="p.badge">
-          @switch (p.badge) {
-            @case ('sale') {
-              -{{ discount() }}%
-            }
-            @case ('new') {
-              Новинка
-            }
-            @case ('hot') {
-              Хит
-            }
-            @case ('used') {
-              Б/у
-            }
-            @case ('out-of-stock') {
-              Нет в наличии
-            }
-          }
-        </m-badge>
-      }
-
-      @if (p.credit) {
-        <m-badge class="card-credit" variant="new">{{ p.credit }}</m-badge>
-      }
-
-      <div class="card-actions">
-        <button
-          type="button"
-          class="card-action-btn"
-          [class.active-favorite]="isFavorite()"
-          (click)="onToggleFavorite($event)">
-          <lucide-icon name="heart" [size]="16" />
-        </button>
-
-        <button
-          type="button"
-          class="card-action-btn"
-          [class.active-compare]="isCompared()"
-          (click)="onToggleCompare($event)">
-          <lucide-icon name="scale" [size]="16" />
-        </button>
-      </div>
     </div>
 
-    <div class="card-body">
-      <p class="card-name">{{ p.name }}</p>
+    <div class="card-product-content">
+      <p class="card-product-title">{{ p.name }}</p>
 
       @if (p.tags?.length) {
-        <div class="card-tags">
+        <ul class="card-product-tags" aria-label="Характеристики">
           @for (tag of p.tags; track tag.label) {
-            <m-tag>{{ tag.label }}</m-tag>
+            <li>
+              <m-tag>{{ tag.label }}</m-tag>
+            </li>
           }
-        </div>
+        </ul>
       }
 
       @if (p.cashback) {
-        <div class="card-cashback">
-          <span class="card-cashback-label">Cashback</span>
-          <m-badge variant="new">{{ p.cashback | number }} ₽</m-badge>
+        <div class="card-product-cashback">
+          <span class="card-product-cashback-label">Кэшбэк</span>
+          <m-badge variant="new" size="sm">{{ p.cashback | number }} ₽</m-badge>
         </div>
       }
 
-      <div class="card-footer">
-        <div class="card-prices">
-          <span class="card-price">{{ p.price | number }} ₽</span>
-          @if (p.oldPrice) {
-            <span class="card-old-price">{{ p.oldPrice | number }} ₽</span>
+      <div class="card-product-footer">
+        <div class="card-product-prices">
+          @if (p.oldPrice && p.oldPrice > p.price) {
+            <div class="card-product-old-row">
+              <span class="card-product-old-price">{{ p.oldPrice | number }} ₽</span>
+              <m-badge variant="sale" size="sm">-{{ discount() }}%</m-badge>
+              <m-badge variant="hot" size="sm">−{{ savings() | number }} ₽</m-badge>
+            </div>
           }
+          <span class="card-product-price">{{ p.price | number }} ₽</span>
         </div>
 
         @if (p.inStock) {
           <button
             mButton
-            [view]="'icon'"
+            view="icon"
             icon="shopping-cart"
             variant="primary"
             size="sm"
+            aria-label="Добавить в корзину"
             (onClick)="onAddToCart($event)"></button>
         }
       </div>

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
-export type BadgeVariant = 'new' | 'sale' | 'used' | 'hot' | 'out-of-stock';
+export type BadgeVariant = 'new' | 'sale' | 'used' | 'hot' | 'popular' | 'out-of-stock';
 export type BadgeSize = 'sm' | 'md';
 
 @Component({

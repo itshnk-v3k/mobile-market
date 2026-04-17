@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
 import { transform } from '@shared/utils/merge-classes';
 import type { ClassValue } from 'clsx';
+import type { LucideIconData } from 'lucide-angular';
+import { LucideAngularModule } from 'lucide-angular';
 
 import { BtnLoaderComponent } from './btn-loader/btn-loader.component';
-import { LucideAngularModule, LucideIconData } from 'lucide-angular';
 
 type ButtonSize = 'sm' | 'md' | 'lg' | 'xl';
 

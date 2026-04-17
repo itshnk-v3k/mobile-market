@@ -1,0 +1,64 @@
+<section class="flex flex-1 flex-col py-6 md:py-10" aria-labelledby="favorites-title">
+  <div class="mx-auto w-full max-w-container px-4 md:px-6">
+    @if (!hasFavorites()) {
+      <m-favorites-empty />
+    } @else {
+      @let gridClass =
+        'grid grid-cols-2 gap-3 sm:grid-cols-3 md:gap-4 lg:grid-cols-4 xl:grid-cols-5';
+
+      <div class="mb-6 flex flex-col gap-4 md:mb-8 md:flex-row md:items-center md:justify-between">
+        <div class="flex items-baseline gap-3">
+          <h1 id="favorites-title" class="text-2xl font-semibold text-text-100 md:text-3xl">
+            Избранное
+          </h1>
+          <span class="text-sm text-text-500">{{ count() }}</span>
+        </div>
+
+        <button
+          mButton
+          view="content"
+          variant="primary"
+          size="sm"
+          icon="trash-2"
+          aria-label="Очистить избранное"
+          (onClick)="clearAll()">
+          Очистить всё
+        </button>
+      </div>
+
+      @if (availableCategories().length > 1) {
+        <div
+          class="mb-5 flex flex-wrap gap-2 md:mb-6"
+          role="toolbar"
+          aria-label="Фильтр по категориям">
+          <button
+            type="button"
+            class="favorites-filter-btn"
+            [class.is-active]="filter() === 'all'"
+            [attr.aria-pressed]="filter() === 'all'"
+            (click)="setFilter('all')">
+            Все
+            <span class="favorites-filter-count">{{ count() }}</span>
+          </button>
+
+          @for (category of availableCategories(); track category) {
+            <button
+              type="button"
+              class="favorites-filter-btn"
+              [class.is-active]="filter() === category"
+              [attr.aria-pressed]="filter() === category"
+              (click)="setFilter(category)">
+              {{ categoryLabel[category] }}
+            </button>
+          }
+        </div>
+      }
+
+      <div [class]="gridClass">
+        @for (product of filteredFavorites(); track product.id) {
+          <m-card-product [product]="product" />
+        }
+      </div>
+    }
+  </div>
+</section>

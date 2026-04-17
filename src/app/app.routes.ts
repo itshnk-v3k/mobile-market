@@ -13,5 +13,15 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'favorites',
+    loadComponent: () =>
+      import('@features/favorites/favorites.component').then(m => m.FavoritesComponent),
+  },
+  {
+    path: 'compare',
+    loadComponent: () =>
+      import('@features/compare/compare.component').then(m => m.CompareComponent),
+  },
   { path: '**', redirectTo: '' },
 ];

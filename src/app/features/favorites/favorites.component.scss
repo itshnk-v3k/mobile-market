@@ -1,0 +1,27 @@
+:host {
+  @apply block;
+
+  .favorites-filter-btn {
+    @apply inline-flex items-center gap-2 rounded-full border border-border-200 bg-surface-500 px-4 py-2 text-sm font-medium text-text-300 transition-colors duration-200;
+
+    &:hover {
+      @apply border-border-50 bg-surface-400 text-text-100;
+    }
+
+    &:focus-visible {
+      @apply outline-none ring-2 ring-green-500/40;
+    }
+
+    &.is-active {
+      @apply border-green-500/60 bg-green-500/10 text-green-500;
+    }
+  }
+
+  .favorites-filter-count {
+    @apply rounded-full bg-surface-300 px-2 py-0.5 text-xs text-text-500;
+
+    .is-active & {
+      @apply bg-green-500/20 text-green-500;
+    }
+  }
+}

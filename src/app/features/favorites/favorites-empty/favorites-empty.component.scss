@@ -1,0 +1,19 @@
+:host {
+  @apply block;
+
+  .favorites-empty-wrap {
+    @apply flex max-w-md flex-col items-center gap-4 text-center;
+  }
+
+  .favorites-empty-icon {
+    @apply flex size-20 items-center justify-center rounded-full border border-border-200 bg-surface-400 text-text-500;
+  }
+
+  .favorites-empty-title {
+    @apply text-2xl font-semibold text-text-100;
+  }
+
+  .favorites-empty-text {
+    @apply mb-2 text-sm leading-relaxed text-text-500;
+  }
+}

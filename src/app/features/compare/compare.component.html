@@ -1,0 +1,124 @@
+<section class="compare-section" aria-labelledby="compare-title">
+  <div class="compare-wrap">
+    @if (count() === 0) {
+      <m-compare-empty />
+    } @else {
+      <header class="compare-header">
+        <h1 id="compare-title" class="compare-title">Сравнение</h1>
+        <span class="compare-count">{{ count() }} / {{ maxItems }}</span>
+        @if (categoryLabel(); as label) {
+          <m-badge variant="new">{{ label }}</m-badge>
+        }
+      </header>
+
+      <div class="compare-scroll">
+        <div class="compare-grid" [style.--compare-cols]="count()">
+          <aside class="compare-panel" aria-label="Управление сравнением">
+            @if (categoryLabel(); as label) {
+              <div class="compare-panel-category">{{ label }}</div>
+            }
+
+            <div
+              class="compare-modes"
+              role="radiogroup"
+              aria-label="Режим отображения характеристик">
+              <button
+                type="button"
+                class="compare-mode"
+                role="radio"
+                [class.is-active]="mode() === 'all'"
+                [attr.aria-checked]="mode() === 'all'"
+                (click)="setMode('all')">
+                <span class="compare-mode-dot" aria-hidden="true"></span>
+                Все характеристики
+              </button>
+
+              <button
+                type="button"
+                class="compare-mode"
+                role="radio"
+                [class.is-active]="mode() === 'common'"
+                [attr.aria-checked]="mode() === 'common'"
+                (click)="setMode('common')">
+                <span class="compare-mode-dot" aria-hidden="true"></span>
+                Сходства
+              </button>
+
+              <button
+                type="button"
+                class="compare-mode"
+                role="radio"
+                [class.is-active]="mode() === 'diff'"
+                [attr.aria-checked]="mode() === 'diff'"
+                (click)="setMode('diff')">
+                <span class="compare-mode-dot" aria-hidden="true"></span>
+                Различия
+              </button>
+            </div>
+
+            <div class="compare-panel-actions">
+              <a mButton variant="primary" routerLink="/" aria-label="Добавить товар к сравнению">
+                Добавить товар
+              </a>
+              <button
+                mButton
+                variant="outline"
+                aria-label="Очистить сравнение"
+                (onClick)="clearAll()">
+                Очистить всё
+              </button>
+            </div>
+          </aside>
+
+          @for (product of items(); track trackProduct($index, product)) {
+            <div class="compare-product-cell">
+              <button
+                type="button"
+                class="compare-remove"
+                aria-label="Убрать из сравнения"
+                (click)="removeProduct(product.id)">
+                <lucide-icon name="x" [size]="16" aria-hidden="true" />
+              </button>
+              <m-card-product [product]="product" />
+            </div>
+          }
+
+          @if (count() === 1) {
+            <div class="compare-hint" role="status">
+              <lucide-icon name="info" [size]="18" aria-hidden="true" />
+              Добавьте хотя бы ещё один товар, чтобы увидеть сравнение
+            </div>
+          }
+
+          @for (group of filteredGroups(); track trackGroup($index, group)) {
+            <h2 class="compare-group-header">{{ group.name }}</h2>
+
+            @for (row of group.rows; track trackRow($index, row)) {
+              <div class="compare-spec-label" [class.has-diff]="row.hasDifference">
+                {{ row.label }}
+              </div>
+
+              @for (value of row.values; track $index) {
+                <div class="compare-spec-value" [class.has-diff]="row.hasDifference">
+                  {{ value }}
+                </div>
+              }
+            }
+          }
+
+          @if (count() > 1 && !filteredGroups().length) {
+            <div class="compare-empty-rows" role="status">
+              @if (mode() === 'diff') {
+                Все характеристики совпадают
+              } @else if (mode() === 'common') {
+                Нет общих характеристик
+              } @else {
+                У выбранных товаров нет характеристик для сравнения
+              }
+            </div>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</section>

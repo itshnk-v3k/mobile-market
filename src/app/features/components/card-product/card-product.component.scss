@@ -1,103 +1,122 @@
 :host {
-  @apply block h-full;
+  @apply flex h-full flex-col;
 
-  .card-link {
-    @apply flex h-full flex-col overflow-hidden rounded-2xl border border-border-200 bg-surface-500 outline-none transition-all duration-300;
+  .card-product-link {
+    @apply relative flex size-full flex-1 flex-col overflow-hidden rounded-2xl border border-border-200 bg-surface-500 outline-none transition-colors duration-200;
 
     &:hover {
       @apply border-green-500/60 bg-surface-400;
       box-shadow:
-        0 0 0 1px theme('colors.green.500' / 30%),
+        0 0 0 1px theme('colors.border.active' / 30%),
         0 4px 24px 0 rgba(0, 0, 0, 0.4),
-        0 0 32px 0 theme('colors.green.500' / 10%);
+        0 0 32px 0 theme('colors.border.active' / 10%);
     }
 
     &:focus-visible {
-      @apply outline-none ring-2 ring-green-500/40;
+      @apply ring-2 ring-border-focus;
     }
 
-    &:hover .card-image {
+    &:hover .card-product-image-src {
       @apply scale-105;
     }
   }
 
-  .card-image-wrap {
-    @apply relative w-full overflow-hidden;
+  .card-product-image {
+    @apply relative w-full flex-shrink-0 overflow-hidden;
     background: linear-gradient(145deg, theme('colors.surface.200'), theme('colors.surface.300'));
     aspect-ratio: 1 / 1;
   }
 
-  .card-image {
+  .card-product-image-src {
     @apply size-full object-contain p-4 transition-transform duration-500 ease-out;
   }
 
-  .card-image-placeholder {
+  .card-product-image-placeholder {
     @apply flex size-full items-center justify-center text-text-500;
   }
 
-  .card-badge {
-    @apply absolute left-2 top-2;
+  .card-product-badges {
+    @apply absolute left-2 top-2 z-2 flex max-w-[75%] flex-col items-start gap-1.5;
   }
 
-  .card-credit {
-    @apply absolute bottom-2 left-2;
+  .card-product-actions {
+    @apply absolute right-2 top-2 z-2 flex flex-col gap-1.5;
   }
 
-  .card-actions {
-    @apply absolute right-2 top-2 flex flex-col gap-1.5;
-  }
+  .card-product-action-btn {
+    @apply flex size-8 items-center justify-center rounded-xl border border-border-200 bg-surface-500/80 text-text-500 backdrop-blur-md transition-all duration-200;
 
-  .card-action-btn {
-    @apply flex size-8 items-center justify-center rounded-xl border border-border-200 bg-surface-500/80 text-text-500 backdrop-blur-md transition-all duration-200 hover:border-border-50 hover:bg-surface-300 hover:text-text-100;
+    &:hover {
+      @apply border-border-50 bg-surface-300 text-text-100;
+    }
 
-    &.active-favorite {
+    &:focus-visible {
+      @apply outline-none ring-2 ring-border-focus;
+    }
+
+    &.card-product-favorite-btn.is-active {
       @apply border-error-500/40 bg-error-500/15 text-error-400;
+
       &:hover {
         @apply border-error-500/60 bg-error-500/25;
       }
     }
 
-    &.active-compare {
-      @apply border-info-300/40 bg-info-300/15 text-info-500;
+    &.card-product-compare-btn.is-active {
+      @apply border-info-400/40 bg-info-400/15 text-info-400;
+
       &:hover {
-        @apply border-info-300/60 bg-info-300/25;
+        @apply border-info-400/60 bg-info-400/25;
       }
     }
   }
 
-  .card-body {
-    @apply flex flex-1 flex-col gap-2 p-3;
+  .card-product-content {
+    @apply flex flex-1 flex-col gap-2.5 p-3 md:p-4;
   }
 
-  .card-name {
-    @apply line-clamp-2 text-sm font-medium leading-snug text-text-100;
+  .card-product-title {
+    @apply line-clamp-2 text-sm font-medium leading-snug text-text-100 md:text-base;
   }
 
-  .card-tags {
-    @apply flex flex-wrap gap-1;
+  .card-product-tags {
+    @apply m-0 flex flex-wrap gap-1 p-0;
+    list-style: none;
   }
 
-  .card-cashback {
+  .card-product-cashback {
     @apply flex items-center gap-1.5;
   }
 
-  .card-cashback-label {
-    @apply text-xs text-text-500;
+  .card-product-cashback-label {
+    @apply text-xs font-medium text-text-300;
   }
 
-  .card-footer {
-    @apply mt-auto flex items-center justify-between gap-2 pt-1;
+  .card-product-footer {
+    @apply mt-auto flex items-end justify-between gap-2 pt-1;
   }
 
-  .card-prices {
-    @apply flex flex-col gap-0.5;
+  .card-product-prices {
+    @apply flex flex-col gap-1;
   }
 
-  .card-price {
-    @apply text-base font-bold text-text-100;
+  .card-product-old-row {
+    @apply flex flex-wrap items-center gap-1.5;
   }
 
-  .card-old-price {
+  .card-product-old-price {
     @apply text-xs text-text-500 line-through;
+  }
+
+  .card-product-price {
+    @apply text-lg font-bold leading-none text-text-100 md:text-xl;
+  }
+
+  &[data-adaptive='true'] {
+    @apply w-full;
+  }
+
+  &:not([data-adaptive='true']) {
+    @apply w-[260px] flex-shrink-0;
   }
 }

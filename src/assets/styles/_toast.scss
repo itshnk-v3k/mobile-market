@@ -1,21 +1,53 @@
 [data-sonner-toaster] {
-  --normal-bg: theme('colors.surface.200') !important;
-  --normal-border: theme('colors.border.200') !important;
+  --normal-bg: theme('colors.surface.100') !important;
+  --normal-border: theme('colors.border.100') !important;
   --normal-text: theme('colors.text.100') !important;
 
-  --success-bg: theme('colors.surface.200') !important;
-  --success-border: theme('colors.green.800') !important;
-  --success-text: theme('colors.green.300') !important;
+  --success-bg: color-mix(
+    in srgb,
+    theme('colors.green.500') 8%,
+    theme('colors.surface.100')
+  ) !important;
+  --success-border: theme('colors.green.600') !important;
+  --success-text: theme('colors.green.200') !important;
 
-  --error-bg: theme('colors.surface.200') !important;
-  --error-border: theme('colors.error.800') !important;
-  --error-text: theme('colors.error.300') !important;
+  --error-bg: color-mix(
+    in srgb,
+    theme('colors.error.500') 10%,
+    theme('colors.surface.100')
+  ) !important;
+  --error-border: theme('colors.error.500') !important;
+  --error-text: theme('colors.error.200') !important;
 
-  --warning-bg: theme('colors.surface.200') !important;
-  --warning-border: theme('colors.warning.800') !important;
-  --warning-text: theme('colors.warning.300') !important;
+  --warning-bg: color-mix(
+    in srgb,
+    theme('colors.warning.500') 9%,
+    theme('colors.surface.100')
+  ) !important;
+  --warning-border: theme('colors.warning.500') !important;
+  --warning-text: theme('colors.warning.200') !important;
 
-  --info-bg: theme('colors.surface.200') !important;
-  --info-border: theme('colors.info.800') !important;
-  --info-text: theme('colors.info.300') !important;
+  --info-bg: color-mix(
+    in srgb,
+    theme('colors.info.500') 9%,
+    theme('colors.surface.100')
+  ) !important;
+  --info-border: theme('colors.info.500') !important;
+  --info-text: theme('colors.info.200') !important;
+}
+
+[data-sonner-toast][data-type='success'] [data-icon] {
+  color: theme('colors.green.400') !important;
+}
+
+[data-sonner-toast][data-type='error'] [data-icon] {
+  color: theme('colors.error.400') !important;
+}
+
+[data-sonner-toast][data-type='warning'] [data-icon] {
+  color: theme('colors.warning.400') !important;
+}
+
+[data-sonner-toast][data-type='info'] [data-icon] {
+  color: theme('colors.info.400') !important;
 }

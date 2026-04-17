@@ -1,8 +1,9 @@
 import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { inject, Injectable, InjectionToken, Injector, type Type } from '@angular/core';
-import { SheetRef } from './sheet-ref';
+
 import { SheetComponent } from './sheet.component';
+import { SheetRef } from './sheet-ref';
 
 export const SHEET_DATA = new InjectionToken<unknown>('SHEET_DATA');
 

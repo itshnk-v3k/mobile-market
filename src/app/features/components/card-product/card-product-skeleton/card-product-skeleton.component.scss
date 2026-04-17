@@ -1,48 +1,72 @@
 :host {
   @apply block h-full;
 
-  .skeleton-wrap {
-    @apply flex h-full flex-col overflow-hidden rounded-2xl border border-border-200;
+  .card-product-link {
+    @apply flex size-full flex-col overflow-hidden rounded-2xl border border-border-200 bg-surface-500;
   }
 
-  .skeleton-image {
-    @apply w-full bg-surface-300;
+  .card-product-image {
+    @apply relative w-full flex-shrink-0 p-2;
     aspect-ratio: 1 / 1;
+
+    .image {
+      @apply size-full rounded-xl;
+    }
   }
 
-  .skeleton-img {
-    @apply size-full rounded-none;
-  }
-
-  .skeleton-body {
+  .card-product-content {
     @apply flex flex-1 flex-col gap-2 p-3;
   }
 
-  .skeleton-name-1 {
-    @apply h-4 w-full;
-  }
-
-  .skeleton-name-2 {
-    @apply h-4 w-3/4;
-  }
-
-  .skeleton-tags {
+  .card-product-tags {
     @apply flex flex-wrap gap-1;
+
+    .tag {
+      @apply h-5 w-12 rounded-full;
+    }
   }
 
-  .skeleton-tag {
-    @apply h-5 w-14 rounded-md;
+  .card-product-title-block {
+    @apply flex flex-col gap-1.5;
+
+    .title {
+      @apply h-4 w-full rounded-full;
+
+      &.title-short {
+        @apply w-3/5;
+      }
+    }
   }
 
-  .skeleton-footer {
-    @apply mt-auto flex items-center justify-between;
+  .cashback {
+    @apply h-4 w-24 rounded-full;
   }
 
-  .skeleton-price {
-    @apply h-6 w-24;
+  .card-product-footer {
+    @apply mt-auto flex items-end justify-between gap-2 pt-1;
   }
 
-  .skeleton-btn {
-    @apply size-8 rounded-lg;
+  .card-product-prices {
+    @apply flex flex-col gap-1;
+
+    .old-price {
+      @apply h-3 w-14 rounded-full;
+    }
+
+    .price {
+      @apply h-5 w-20 rounded-full;
+    }
+  }
+
+  .cart-btn {
+    @apply size-8 rounded-xl;
+  }
+
+  &[data-adaptive='true'] {
+    @apply w-full;
+  }
+
+  &:not([data-adaptive='true']) {
+    @apply w-[260px] flex-shrink-0;
   }
 }
