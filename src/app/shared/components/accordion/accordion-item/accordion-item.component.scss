@@ -1,0 +1,47 @@
+:host {
+  @apply flex flex-col overflow-hidden rounded-2xl border border-border-200 bg-surface-500;
+
+  .accordion-button {
+    @apply flex w-full items-center justify-between gap-4 px-4 py-3.5 text-left text-base font-medium text-text-100 transition-colors duration-200 md:px-5 md:py-4;
+
+    &:hover:not(:disabled) {
+      @apply bg-surface-400;
+    }
+
+    &:focus-visible {
+      @apply outline-none ring-2 ring-inset ring-border-focus;
+    }
+
+    &:disabled {
+      @apply pointer-events-none opacity-50;
+    }
+  }
+
+  .accordion-title {
+    @apply truncate;
+  }
+
+  .accordion-icon {
+    @apply shrink-0 text-text-300 transition-transform duration-300;
+
+    &[data-open='true'] {
+      @apply rotate-180;
+    }
+  }
+
+  .accordion-body {
+    @apply grid transition-[grid-template-rows] duration-300;
+
+    &[data-state='open'] {
+      @apply grid-rows-[1fr];
+    }
+
+    &[data-state='closed'] {
+      @apply grid-rows-[0fr];
+    }
+  }
+
+  .accordion-content {
+    @apply overflow-hidden;
+  }
+}

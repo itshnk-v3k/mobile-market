@@ -2,7 +2,7 @@
   @apply block;
 
   .favorites-empty-wrap {
-    @apply flex max-w-md flex-col items-center gap-4 text-center;
+    @apply mx-auto flex max-w-md flex-col items-center gap-4 text-center;
   }
 
   .favorites-empty-icon {

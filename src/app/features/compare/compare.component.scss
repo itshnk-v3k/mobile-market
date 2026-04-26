@@ -2,11 +2,11 @@
   @apply block py-6 md:py-10;
 
   .compare-wrap {
-    @apply mx-auto w-full max-w-container px-4 md:px-6;
+    @apply mx-auto flex w-full max-w-container flex-col gap-4 px-4 md:gap-6 md:px-6;
   }
 
   .compare-header {
-    @apply mb-6 flex flex-wrap items-center gap-3 md:mb-8;
+    @apply flex flex-wrap items-center gap-3;
   }
 
   .compare-title {
@@ -17,111 +17,123 @@
     @apply text-base font-normal text-text-500;
   }
 
-  .compare-scroll {
-    @apply -mx-4 overflow-x-auto px-4 pb-4 md:-mx-6 md:px-6;
+  .compare-controls {
+    @apply flex flex-col gap-5;
   }
 
-  .compare-grid {
-    @apply gap-2 md:gap-3;
-    display: grid;
-    grid-template-columns: 260px repeat(var(--compare-cols), minmax(240px, 1fr));
-    min-width: fit-content;
-  }
-
-  .compare-panel {
-    @apply flex flex-col gap-4 rounded-2xl border border-border-200 bg-surface-500 p-4;
-  }
-
-  .compare-panel-category {
-    @apply flex items-center justify-between rounded-xl border border-border-200 bg-surface-400 px-3 py-2.5 text-sm font-medium text-text-100;
+  .compare-controls-accordion .compare-controls {
+    @apply px-4 pb-4;
   }
 
   .compare-modes {
-    @apply flex flex-col gap-1;
+    @apply flex flex-col gap-2.5;
   }
 
-  .compare-mode {
-    @apply flex items-center gap-2.5 rounded-xl border border-transparent px-3 py-2 text-left text-sm text-text-300 transition-colors duration-200;
+  .compare-actions {
+    @apply flex flex-col gap-2;
+  }
 
-    &:hover {
-      @apply bg-surface-400 text-text-100;
+  .compare-scroll {
+    @apply -mx-4 overflow-x-auto px-4 pb-2 md:-mx-6 md:px-6;
+  }
+
+  .compare-content {
+    @apply flex flex-col gap-4;
+    min-width: fit-content;
+    --compare-label-col: 240px;
+  }
+
+  .compare-products {
+    @apply grid gap-3;
+    grid-template-columns: repeat(var(--compare-cols), minmax(220px, 1fr));
+  }
+
+  .compare-sidebar {
+    @apply flex flex-col rounded-2xl border border-border-200 bg-surface-500 p-5;
+
+    .compare-controls {
+      @apply gap-6;
     }
 
-    &:focus-visible {
-      @apply outline-none ring-2 ring-green-500/40;
-    }
-
-    &.is-active {
-      @apply border-green-500/30 bg-green-500/10 text-text-100;
+    .compare-modes,
+    .compare-actions {
+      @apply items-stretch;
     }
   }
 
-  .compare-mode-dot {
-    @apply relative size-4 flex-shrink-0 rounded-full border-2 border-border-50 transition-colors duration-200;
+  .compare-product-cell {
+    @apply min-w-0;
+  }
 
-    &::after {
-      @apply absolute inset-0 m-auto block size-1.5 rounded-full bg-text-50 transition-transform duration-200;
-      content: '';
-      transform: scale(0);
+  .compare-hint {
+    @apply flex items-center gap-2 rounded-2xl border border-border-200 bg-surface-500 p-4 text-sm text-text-300;
+  }
+
+  .compare-group {
+    @apply overflow-hidden rounded-2xl border border-border-200 bg-surface-500;
+
+    & + & {
+      @apply mt-3;
+    }
+  }
+
+  .compare-group-title {
+    @apply border-b border-border-200 bg-surface-400 px-5 py-3.5 text-base font-semibold text-text-100;
+  }
+
+  .compare-spec-table {
+    @apply flex flex-col;
+  }
+
+  .compare-spec-row {
+    @apply grid transition-colors duration-200;
+    grid-template-columns: repeat(var(--compare-cols), minmax(220px, 1fr));
+
+    &:not(:last-child) {
+      @apply border-b border-border-200;
     }
 
-    .compare-mode.is-active & {
-      @apply border-green-500 bg-green-500;
+    &.is-match {
+      @apply bg-green-500/[0.06];
 
-      &::after {
-        transform: scale(1);
+      .compare-spec-label,
+      .compare-spec-value {
+        @apply text-text-100;
       }
     }
   }
 
-  .compare-panel-actions {
-    @apply mt-auto flex flex-col gap-2;
-  }
-
-  .compare-product-cell {
-    @apply relative;
-  }
-
-  .compare-remove {
-    @apply absolute right-2 top-2 z-3 flex size-7 items-center justify-center rounded-full border border-border-200 bg-surface-400 text-text-500 transition-all duration-200;
-
-    &:hover {
-      @apply border-error-500/40 bg-error-500/15 text-error-400;
-    }
-
-    &:focus-visible {
-      @apply outline-none ring-2 ring-error-500/40;
-    }
-  }
-
-  .compare-hint {
-    @apply flex items-center gap-2 rounded-xl border border-border-200 bg-surface-500 p-4 text-sm text-text-300;
-    grid-column: 1 / -1;
-  }
-
-  .compare-group-header {
-    @apply mt-4 rounded-xl border border-border-200 bg-surface-500 p-4 text-lg font-semibold text-text-100;
-    grid-column: 1 / -1;
-  }
-
   .compare-spec-label {
-    @apply flex items-center rounded-xl border border-border-200 bg-surface-500 p-3 text-sm font-medium text-text-300 md:p-4;
-
-    &.has-diff {
-      @apply text-text-100;
-    }
+    @apply col-span-full flex items-center border-b border-border-200 px-3 py-2.5 text-sm font-medium text-text-200;
   }
 
   .compare-spec-value {
-    @apply flex items-center rounded-xl border border-border-200 bg-surface-500 p-3 text-sm text-text-200 md:p-4;
+    @apply flex min-w-0 items-center px-3 py-3 text-sm text-text-300;
 
-    &.has-diff {
-      @apply border-green-500/20 bg-green-500/5 text-text-100;
+    &:not(:last-child) {
+      @apply border-r border-border-200;
     }
   }
 
   .compare-empty-rows {
-    @apply rounded-xl border border-border-200 bg-surface-500 p-8 text-center text-sm text-text-500;
-    grid-column: 1 / -1;
+    @apply rounded-2xl border border-border-200 bg-surface-500 p-8 text-center text-sm text-text-500;
+  }
+
+  @screen lg {
+    .compare-products,
+    .compare-spec-row {
+      grid-template-columns: var(--compare-label-col) repeat(
+          var(--compare-cols),
+          minmax(240px, 1fr)
+        );
+    }
+
+    .compare-spec-label {
+      @apply col-span-1 border-b-0 border-r border-border-200 px-5 py-3.5;
+    }
+
+    .compare-spec-value {
+      @apply px-5 py-3.5;
+    }
   }
 }

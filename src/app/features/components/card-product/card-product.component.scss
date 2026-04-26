@@ -1,11 +1,12 @@
 :host {
-  @apply flex h-full flex-col;
+  @apply flex flex-col;
 
   .card-product-link {
     @apply relative flex size-full flex-1 flex-col overflow-hidden rounded-2xl border border-border-200 bg-surface-500 outline-none transition-colors duration-200;
 
     &:hover {
       @apply border-green-500/60 bg-surface-400;
+
       box-shadow:
         0 0 0 1px theme('colors.border.active' / 30%),
         0 4px 24px 0 rgba(0, 0, 0, 0.4),
@@ -22,9 +23,8 @@
   }
 
   .card-product-image {
-    @apply relative w-full flex-shrink-0 overflow-hidden;
+    @apply relative aspect-square w-full flex-shrink-0 overflow-hidden;
     background: linear-gradient(145deg, theme('colors.surface.200'), theme('colors.surface.300'));
-    aspect-ratio: 1 / 1;
   }
 
   .card-product-image-src {
@@ -80,8 +80,7 @@
   }
 
   .card-product-tags {
-    @apply m-0 flex flex-wrap gap-1 p-0;
-    list-style: none;
+    @apply m-0 flex list-none flex-wrap gap-1 p-0;
   }
 
   .card-product-cashback {

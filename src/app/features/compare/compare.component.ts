@@ -1,11 +1,18 @@
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { CardProductComponent } from '@features/components/card-product/card-product.component';
+import { AccordionComponent } from '@shared/components/accordion/accordion.component';
+import { AccordionItemComponent } from '@shared/components/accordion/accordion-item/accordion-item.component';
 import { BadgeComponent } from '@shared/components/badge/badge.component';
 import { ButtonComponent } from '@shared/components/button/button.component';
+import { RadioComponent } from '@shared/components/radio/radio.component';
 import { PRODUCT_CATEGORY_LABELS, type ProductCardData } from '@shared/models/product.model';
 import { CompareService } from '@shared/services/compare/compare.service';
 import { LucideAngularModule } from 'lucide-angular';
+import { map } from 'rxjs';
 
 import { CompareEmptyComponent } from './compare-empty/compare-empty.component';
 
@@ -23,6 +30,11 @@ interface CompareGroup {
   rows: CompareRow[];
 }
 
+interface ModeOption {
+  label: string;
+  value: CompareMode;
+}
+
 const DEFAULT_GROUP = 'Характеристики';
 
 @Component({
@@ -34,9 +46,13 @@ const DEFAULT_GROUP = 'Характеристики';
     RouterLink,
     LucideAngularModule,
     BadgeComponent,
+    NgTemplateOutlet,
     ButtonComponent,
     CardProductComponent,
     CompareEmptyComponent,
+    AccordionComponent,
+    AccordionItemComponent,
+    RadioComponent,
   ],
   host: {
     class: 'flex flex-1 flex-col',
@@ -44,12 +60,24 @@ const DEFAULT_GROUP = 'Характеристики';
 })
 export class CompareComponent {
   private readonly compareService = inject(CompareService);
+  private readonly breakpointObserver = inject(BreakpointObserver);
+
+  protected readonly isDesktop = toSignal(
+    this.breakpointObserver.observe('(min-width: 1024px)').pipe(map(s => s.matches)),
+    { initialValue: false }
+  );
 
   protected readonly mode = signal<CompareMode>('all');
 
   protected readonly items = this.compareService.items;
   protected readonly count = this.compareService.count;
   protected readonly maxItems = this.compareService.maxItems;
+
+  protected readonly modeOptions: ModeOption[] = [
+    { label: 'Все характеристики', value: 'all' },
+    { label: 'Только сходства', value: 'common' },
+    { label: 'Только различия', value: 'diff' },
+  ];
 
   protected readonly categoryLabel = computed(() => {
     const category = this.compareService.activeCategory();
@@ -118,14 +146,10 @@ export class CompareComponent {
       .filter(group => group.rows.length > 0);
   });
 
-  protected readonly hasAnyRows = computed(() => this.allGroups().some(g => g.rows.length > 0));
+  protected readonly defaultGroupValues = computed(() => this.allGroups().map(g => g.name));
 
-  protected setMode(mode: CompareMode): void {
-    this.mode.set(mode);
-  }
-
-  protected removeProduct(id: string): void {
-    this.compareService.remove(id);
+  protected setMode(mode: unknown): void {
+    this.mode.set(mode as CompareMode);
   }
 
   protected clearAll(): void {

@@ -11,102 +11,60 @@
         }
       </header>
 
+      @if (!isDesktop()) {
+        <m-accordion class="compare-controls-accordion" [defaultValue]="'settings'">
+          <m-accordion-item title="Параметры сравнения" value="settings">
+            <ng-container [ngTemplateOutlet]="controlsTpl" />
+          </m-accordion-item>
+        </m-accordion>
+      }
+
       <div class="compare-scroll">
-        <div class="compare-grid" [style.--compare-cols]="count()">
-          <aside class="compare-panel" aria-label="Управление сравнением">
-            @if (categoryLabel(); as label) {
-              <div class="compare-panel-category">{{ label }}</div>
+        <div class="compare-content" [style.--compare-cols]="count()">
+          <div class="compare-products">
+            @if (isDesktop()) {
+              <aside class="compare-sidebar" aria-label="Параметры сравнения">
+                <ng-container [ngTemplateOutlet]="controlsTpl" />
+              </aside>
             }
 
-            <div
-              class="compare-modes"
-              role="radiogroup"
-              aria-label="Режим отображения характеристик">
-              <button
-                type="button"
-                class="compare-mode"
-                role="radio"
-                [class.is-active]="mode() === 'all'"
-                [attr.aria-checked]="mode() === 'all'"
-                (click)="setMode('all')">
-                <span class="compare-mode-dot" aria-hidden="true"></span>
-                Все характеристики
-              </button>
-
-              <button
-                type="button"
-                class="compare-mode"
-                role="radio"
-                [class.is-active]="mode() === 'common'"
-                [attr.aria-checked]="mode() === 'common'"
-                (click)="setMode('common')">
-                <span class="compare-mode-dot" aria-hidden="true"></span>
-                Сходства
-              </button>
-
-              <button
-                type="button"
-                class="compare-mode"
-                role="radio"
-                [class.is-active]="mode() === 'diff'"
-                [attr.aria-checked]="mode() === 'diff'"
-                (click)="setMode('diff')">
-                <span class="compare-mode-dot" aria-hidden="true"></span>
-                Различия
-              </button>
-            </div>
-
-            <div class="compare-panel-actions">
-              <a mButton variant="primary" routerLink="/" aria-label="Добавить товар к сравнению">
-                Добавить товар
-              </a>
-              <button
-                mButton
-                variant="outline"
-                aria-label="Очистить сравнение"
-                (onClick)="clearAll()">
-                Очистить всё
-              </button>
-            </div>
-          </aside>
-
-          @for (product of items(); track trackProduct($index, product)) {
-            <div class="compare-product-cell">
-              <button
-                type="button"
-                class="compare-remove"
-                aria-label="Убрать из сравнения"
-                (click)="removeProduct(product.id)">
-                <lucide-icon name="x" [size]="16" aria-hidden="true" />
-              </button>
-              <m-card-product [product]="product" />
-            </div>
-          }
+            @for (product of items(); track trackProduct($index, product)) {
+              <div class="compare-product-cell">
+                <m-card-product [product]="product" />
+              </div>
+            }
+          </div>
 
           @if (count() === 1) {
             <div class="compare-hint" role="status">
               <lucide-icon name="info" [size]="18" aria-hidden="true" />
               Добавьте хотя бы ещё один товар, чтобы увидеть сравнение
             </div>
-          }
-
-          @for (group of filteredGroups(); track trackGroup($index, group)) {
-            <h2 class="compare-group-header">{{ group.name }}</h2>
-
-            @for (row of group.rows; track trackRow($index, row)) {
-              <div class="compare-spec-label" [class.has-diff]="row.hasDifference">
-                {{ row.label }}
-              </div>
-
-              @for (value of row.values; track $index) {
-                <div class="compare-spec-value" [class.has-diff]="row.hasDifference">
-                  {{ value }}
+          } @else if (filteredGroups().length) {
+            @if (isDesktop()) {
+              @for (group of filteredGroups(); track trackGroup($index, group)) {
+                <div class="compare-group">
+                  <h2 class="compare-group-title">{{ group.name }}</h2>
+                  <ng-container
+                    [ngTemplateOutlet]="specTableTpl"
+                    [ngTemplateOutletContext]="{ $implicit: group }" />
                 </div>
               }
+            } @else {
+              <m-accordion
+                class="compare-spec-accordion"
+                type="multiple"
+                [defaultValue]="defaultGroupValues()">
+                @for (group of filteredGroups(); track trackGroup($index, group)) {
+                  <m-accordion-item [title]="group.name" [value]="group.name">
+                    <ng-container
+                      [ngTemplateOutlet]="specTableTpl"
+                      [ngTemplateOutletContext]="{ $implicit: group }" />
+                  </m-accordion-item>
+                }
+              </m-accordion>
             }
-          }
-
-          @if (count() > 1 && !filteredGroups().length) {
+          } @else {
             <div class="compare-empty-rows" role="status">
               @if (mode() === 'diff') {
                 Все характеристики совпадают
@@ -120,5 +78,42 @@
         </div>
       </div>
     }
+
+    <ng-template #controlsTpl>
+      <div class="compare-controls">
+        <div class="compare-modes" role="radiogroup" aria-label="Режим отображения характеристик">
+          @for (option of modeOptions; track option.value) {
+            <m-radio
+              [value]="option.value"
+              [checked]="mode() === option.value"
+              (radioChange)="setMode($event)">
+              {{ option.label }}
+            </m-radio>
+          }
+        </div>
+
+        <div class="compare-actions">
+          <a mButton variant="primary" routerLink="/" aria-label="Добавить товар к сравнению">
+            Добавить товар
+          </a>
+          <button mButton variant="outline" aria-label="Очистить сравнение" (onClick)="clearAll()">
+            Очистить всё
+          </button>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template #specTableTpl let-group>
+      <div class="compare-spec-table">
+        @for (row of group.rows; track trackRow($index, row)) {
+          <div class="compare-spec-row" [class.is-match]="!row.hasDifference">
+            <div class="compare-spec-label">{{ row.label }}</div>
+            @for (value of row.values; track $index) {
+              <div class="compare-spec-value">{{ value }}</div>
+            }
+          </div>
+        }
+      </div>
+    </ng-template>
   </div>
 </section>

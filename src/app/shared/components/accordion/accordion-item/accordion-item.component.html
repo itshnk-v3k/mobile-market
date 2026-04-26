@@ -1,0 +1,27 @@
+<button
+  type="button"
+  class="accordion-button"
+  [id]="headerId"
+  [disabled]="disabled()"
+  [attr.aria-controls]="contentId()"
+  [attr.aria-expanded]="isOpen()"
+  (click)="toggle()">
+  <span class="accordion-title">{{ title() }}</span>
+  <lucide-icon
+    class="accordion-icon"
+    name="chevron-down"
+    [size]="18"
+    [attr.data-open]="isOpen()"
+    aria-hidden="true" />
+</button>
+
+<div
+  role="region"
+  class="accordion-body"
+  [id]="contentId()"
+  [attr.aria-labelledby]="headerId"
+  [attr.data-state]="isOpen() ? 'open' : 'closed'">
+  <div class="accordion-content">
+    <ng-content />
+  </div>
+</div>
