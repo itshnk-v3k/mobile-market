@@ -1,0 +1,20 @@
+# Dependencies
+/node_modules
+
+# Build output
+/dist
+
+# Prisma generated client
+/generated
+/prisma/generated
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Local uploads (media files served at /api/uploads)
+/uploads
+
+# Logs
+*.log

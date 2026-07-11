@@ -42,3 +42,7 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+# Reference-only sibling project (NEOMATTEN) — architecture reference, never
+# part of Mobile Market. Must never be tracked, built, or committed here.
+/neomatten-example-for-mm/
