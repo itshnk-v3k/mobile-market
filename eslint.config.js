@@ -54,5 +54,34 @@ export default tseslint.config(
     rules: {
       '@angular-eslint/template/label-has-associated-control': 'off',
     },
+  },
+  // Per-project selector prefixes. The storefront uses `m-`; the admin and the
+  // shared library use their own prefixes, so re-scope the selector rules for
+  // their files (later flat-config blocks win for matching files).
+  {
+    files: ['projects/mobile-market-admin/**/*.ts'],
+    rules: {
+      '@angular-eslint/directive-selector': [
+        'error',
+        { type: 'attribute', prefix: 'mma', style: 'camelCase' },
+      ],
+      '@angular-eslint/component-selector': [
+        'error',
+        { type: 'element', prefix: 'mma', style: 'kebab-case' },
+      ],
+    },
+  },
+  {
+    files: ['projects/mobile-market-shared/**/*.ts'],
+    rules: {
+      '@angular-eslint/directive-selector': [
+        'error',
+        { type: 'attribute', prefix: 'mms', style: 'camelCase' },
+      ],
+      '@angular-eslint/component-selector': [
+        'error',
+        { type: 'element', prefix: 'mms', style: 'kebab-case' },
+      ],
+    },
   }
 );

@@ -4,6 +4,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "ignoreDeprecations": "6.0",
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
@@ -16,11 +17,12 @@
     "module": "preserve",
     "moduleResolution": "bundler",
     "paths": {
-      "@core/*": ["src/app/core/*"],
-      "@shared/*": ["src/app/shared/*"],
-      "@features/*": ["src/app/features/*"],
-      "@layout/*": ["src/app/layout/*"],
-      "@env/*": ["src/environments/*"]
+      "@core/*": ["projects/mobile-market-app/src/app/core/*"],
+      "@shared/*": ["projects/mobile-market-app/src/app/shared/*"],
+      "@features/*": ["projects/mobile-market-app/src/app/features/*"],
+      "@layout/*": ["projects/mobile-market-app/src/app/layout/*"],
+      "@env/*": ["projects/mobile-market-app/src/environments/*"],
+      "mobile-market-shared": ["./dist/mobile-market-shared"]
     }
   },
   "angularCompilerOptions": {
@@ -30,5 +32,24 @@
     "strictTemplates": true
   },
   "files": [],
-  "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.spec.json" }]
+  "references": [
+    {
+      "path": "./projects/mobile-market-app/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/mobile-market-app/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/mobile-market-admin/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/mobile-market-admin/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/mobile-market-shared/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/mobile-market-shared/tsconfig.spec.json"
+    }
+  ]
 }

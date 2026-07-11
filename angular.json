@@ -10,7 +10,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "mobile-market": {
+    "mobile-market-app": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -40,34 +40,34 @@
           "skipTests": true
         }
       },
-      "root": "",
-      "sourceRoot": "src",
+      "root": "projects/mobile-market-app",
+      "sourceRoot": "projects/mobile-market-app/src",
       "prefix": "m",
       "architect": {
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "outputPath": "dist/mobile-market",
-            "index": "src/index.html",
-            "browser": "src/main.ts",
+            "outputPath": "dist/mobile-market-app",
+            "index": "projects/mobile-market-app/src/index.html",
+            "browser": "projects/mobile-market-app/src/main.ts",
             "polyfills": ["zone.js"],
-            "tsConfig": "tsconfig.app.json",
+            "tsConfig": "projects/mobile-market-app/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "src/assets",
+                "input": "projects/mobile-market-app/src/assets",
                 "output": "assets"
               }
             ],
-            "styles": ["src/styles.scss"]
+            "styles": ["projects/mobile-market-app/src/styles.scss"]
           },
           "configurations": {
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "replace": "projects/mobile-market-app/src/environments/environment.ts",
+                  "with": "projects/mobile-market-app/src/environments/environment.prod.ts"
                 }
               ],
               "budgets": [
@@ -90,8 +90,8 @@
             "development": {
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.dev.ts"
+                  "replace": "projects/mobile-market-app/src/environments/environment.ts",
+                  "with": "projects/mobile-market-app/src/environments/environment.dev.ts"
                 }
               ],
               "optimization": false,
@@ -105,21 +105,157 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "mobile-market:build:production"
+              "buildTarget": "mobile-market-app:build:production"
             },
             "development": {
-              "buildTarget": "mobile-market:build:development"
+              "buildTarget": "mobile-market-app:build:development"
             }
           },
           "defaultConfiguration": "development"
         },
         "test": {
-          "builder": "@angular/build:unit-test"
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "projects/mobile-market-app/tsconfig.spec.json",
+            "buildTarget": "mobile-market-app:build"
+          }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+            "lintFilePatterns": [
+              "projects/mobile-market-app/src/**/*.ts",
+              "projects/mobile-market-app/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "mobile-market-admin": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss",
+          "standalone": true,
+          "skipTests": true,
+          "changeDetection": "OnPush",
+          "type": "component"
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "standalone": true,
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "standalone": true,
+          "skipTests": true
+        },
+        "@schematics/angular:interceptor": {
+          "skipTests": true
+        },
+        "@schematics/angular:resolver": {
+          "skipTests": true
+        }
+      },
+      "root": "projects/mobile-market-admin",
+      "sourceRoot": "projects/mobile-market-admin/src",
+      "prefix": "mma",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "projects/mobile-market-admin/src/main.ts",
+            "tsConfig": "projects/mobile-market-admin/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/mobile-market-admin/public"
+              }
+            ],
+            "styles": ["projects/mobile-market-admin/src/styles.scss"]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "mobile-market-admin:build:production"
+            },
+            "development": {
+              "buildTarget": "mobile-market-admin:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "projects/mobile-market-admin/tsconfig.spec.json",
+            "buildTarget": "mobile-market-admin:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/mobile-market-admin/src/**/*.ts",
+              "projects/mobile-market-admin/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "mobile-market-shared": {
+      "projectType": "library",
+      "root": "projects/mobile-market-shared",
+      "sourceRoot": "projects/mobile-market-shared/src",
+      "prefix": "mms",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/mobile-market-shared/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/mobile-market-shared/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "projects/mobile-market-shared/tsconfig.spec.json"
           }
         }
       }
