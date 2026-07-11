@@ -7,9 +7,9 @@
   [attr.aria-expanded]="isOpen()"
   (click)="toggle()">
   <span class="accordion-title">{{ title() }}</span>
-  <lucide-icon
+  <svg
     class="accordion-icon"
-    name="chevron-down"
+    lucideIcon="chevron-down"
     [size]="18"
     [attr.data-open]="isOpen()"
     aria-hidden="true" />

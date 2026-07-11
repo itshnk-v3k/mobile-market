@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
+import type { LucideIconData } from '@lucide/angular';
+import { LucideDynamicIcon } from '@lucide/angular';
 import { transform } from '@shared/utils/merge-classes';
 import type { ClassValue } from 'clsx';
-import type { LucideIconData } from 'lucide-angular';
-import { LucideAngularModule } from 'lucide-angular';
 
 import { BtnLoaderComponent } from './btn-loader/btn-loader.component';
 
@@ -33,7 +33,7 @@ const ICON_SIZES: Record<ButtonSize, number> = {
   selector: 'button[mButton], a[mButton]',
   templateUrl: './button.component.html',
   styleUrl: './button.component.scss',
-  imports: [BtnLoaderComponent, LucideAngularModule],
+  imports: [BtnLoaderComponent, LucideDynamicIcon],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[attr.disabled]': 'disabled() || null',

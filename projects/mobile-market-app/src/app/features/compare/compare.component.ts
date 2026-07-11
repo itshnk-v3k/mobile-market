@@ -4,6 +4,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@a
 import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { CardProductComponent } from '@features/components/card-product/card-product.component';
+import { LucideDynamicIcon } from '@lucide/angular';
 import { AccordionComponent } from '@shared/components/accordion/accordion.component';
 import { AccordionItemComponent } from '@shared/components/accordion/accordion-item/accordion-item.component';
 import { BadgeComponent } from '@shared/components/badge/badge.component';
@@ -11,7 +12,6 @@ import { ButtonComponent } from '@shared/components/button/button.component';
 import { RadioComponent } from '@shared/components/radio/radio.component';
 import { PRODUCT_CATEGORY_LABELS, type ProductCardData } from '@shared/models/product.model';
 import { CompareService } from '@shared/services/compare/compare.service';
-import { LucideAngularModule } from 'lucide-angular';
 import { map } from 'rxjs';
 
 import { CompareEmptyComponent } from './compare-empty/compare-empty.component';
@@ -44,7 +44,7 @@ const DEFAULT_GROUP = 'Характеристики';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     RouterLink,
-    LucideAngularModule,
+    LucideDynamicIcon,
     BadgeComponent,
     NgTemplateOutlet,
     ButtonComponent,

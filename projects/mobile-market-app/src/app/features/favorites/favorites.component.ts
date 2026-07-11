@@ -7,7 +7,6 @@ import {
   type ProductCategory,
 } from '@shared/models/product.model';
 import { FavoritesService } from '@shared/services/favorites/favorites.service';
-import { LucideAngularModule } from 'lucide-angular';
 
 import { FavoritesEmptyComponent } from './favorites-empty/favorites-empty.component';
 
@@ -18,7 +17,7 @@ type CategoryFilter = ProductCategory | 'all';
   templateUrl: './favorites.component.html',
   styleUrl: './favorites.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CardProductComponent, FavoritesEmptyComponent, ButtonComponent, LucideAngularModule],
+  imports: [CardProductComponent, FavoritesEmptyComponent, ButtonComponent],
   host: {
     class: 'flex flex-1 flex-col',
   },

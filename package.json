@@ -30,7 +30,7 @@
     "embla-carousel-wheel-gestures": "^8.1.0",
     "leaflet": "^1.9.4",
     "libphonenumber-js": "^1.12.41",
-    "lucide-angular": "^1.0.0",
+    "@lucide/angular": "^1.23.0",
     "ng-otp-input": "^2.0.9",
     "ngx-cookie-service": "^22.0.0",
     "ngx-mask": "^22.0.1",

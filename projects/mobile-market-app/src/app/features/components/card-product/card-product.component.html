@@ -19,7 +19,7 @@
           [attr.aria-label]="isFavorite() ? 'Удалить из избранного' : 'Добавить в избранное'"
           [attr.aria-pressed]="isFavorite()"
           (click)="onToggleFavorite($event)">
-          <lucide-icon name="heart" [size]="18" aria-hidden="true" />
+          <svg lucideIcon="heart" [size]="18" aria-hidden="true" />
         </button>
 
         <button
@@ -29,7 +29,7 @@
           [attr.aria-label]="isInCompare() ? 'Удалить из сравнения' : 'Добавить к сравнению'"
           [attr.aria-pressed]="isInCompare()"
           (click)="onToggleCompare($event)">
-          <lucide-icon name="scale" [size]="18" aria-hidden="true" />
+          <svg lucideIcon="scale" [size]="18" aria-hidden="true" />
         </button>
       </div>
 
@@ -42,7 +42,7 @@
           (error)="onImageError()" />
       } @else {
         <div class="card-product-image-placeholder" aria-hidden="true">
-          <lucide-icon name="smartphone" [size]="52" />
+          <svg lucideIcon="smartphone" [size]="52" />
         </div>
       }
     </div>

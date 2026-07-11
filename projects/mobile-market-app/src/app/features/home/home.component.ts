@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MOCK_PRODUCTS } from '@core/mocks/products.mock';
 import { CardProductComponent } from '@features/components/card-product/card-product.component';
+import { LucideDynamicIcon } from '@lucide/angular';
 import { BadgeComponent } from '@shared/components/badge/badge.component';
 import { ButtonComponent } from '@shared/components/button/button.component';
 import { CheckboxComponent } from '@shared/components/checkbox/checkbox.component';
@@ -15,7 +16,6 @@ import { TagComponent } from '@shared/components/tag/tag.component';
 import { TextareaComponent } from '@shared/components/textarea/textarea.component';
 import { TooltipDirective } from '@shared/components/tooltip/tooltip.directive';
 import type { ProductCardData } from '@shared/models/product.model';
-import { LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'm-home',
@@ -36,7 +36,7 @@ import { LucideAngularModule } from 'lucide-angular';
     SwitchComponent,
     TextareaComponent,
     TooltipDirective,
-    LucideAngularModule,
+    LucideDynamicIcon,
     CardProductComponent,
   ],
 })

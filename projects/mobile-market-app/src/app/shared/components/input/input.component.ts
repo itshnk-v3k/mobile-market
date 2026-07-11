@@ -24,9 +24,9 @@ import {
   NG_VALUE_ACCESSOR,
   NgControl,
 } from '@angular/forms';
+import { LucideDynamicIcon } from '@lucide/angular';
 import { ValidationErrorMessagesService } from '@shared/services/validation-error-messages.service.ts/validation-error-messages.service.ts.component';
 import { generateId, mergeClasses } from '@shared/utils/merge-classes';
-import { LucideAngularModule } from 'lucide-angular';
 import { NgxMaskDirective } from 'ngx-mask';
 
 export type InputType = 'text' | 'email' | 'password' | 'tel' | 'number' | 'search';
@@ -38,7 +38,7 @@ type InputStatus = 'base' | 'error';
   templateUrl: './input.component.html',
   styleUrl: './input.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormsModule, NgxMaskDirective, LucideAngularModule],
+  imports: [FormsModule, NgxMaskDirective, LucideDynamicIcon],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

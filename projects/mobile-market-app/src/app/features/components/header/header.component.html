@@ -18,18 +18,18 @@
 
   <div class="header-actions">
     <button type="button" class="header-icon-btn" aria-label="Поиск">
-      <lucide-icon name="search" [size]="20" />
+      <svg lucideIcon="search" [size]="20" />
     </button>
 
     <button type="button" class="header-icon-btn" aria-label="Избранное">
-      <lucide-icon name="heart" [size]="20" />
+      <svg lucideIcon="heart" [size]="20" />
       @if (wishlistCount()) {
         <span class="header-badge">{{ wishlistCount() > 99 ? '99+' : wishlistCount() }}</span>
       }
     </button>
 
     <button type="button" class="header-icon-btn" aria-label="Корзина" (click)="openCart()">
-      <lucide-icon name="shopping-cart" [size]="20" />
+      <svg lucideIcon="shopping-cart" [size]="20" />
       @if (cartCount()) {
         <span class="header-badge">{{ cartCount() > 99 ? '99+' : cartCount() }}</span>
       }
@@ -61,7 +61,7 @@
         routerLinkActive="active"
         (click)="closeMobileMenu()">
         <span class="mobile-nav-link__text">{{ item.label }}</span>
-        <lucide-icon name="chevron-right" [size]="16" class="mobile-nav-link__arrow" />
+        <svg lucideIcon="chevron-right" [size]="16" class="mobile-nav-link__arrow" />
       </a>
     }
   </nav>

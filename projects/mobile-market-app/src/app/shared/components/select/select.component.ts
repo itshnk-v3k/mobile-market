@@ -15,8 +15,8 @@ import {
 } from '@angular/core';
 import type { ControlValueAccessor} from '@angular/forms';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { LucideDynamicIcon } from '@lucide/angular';
 import { generateId } from '@shared/utils/merge-classes';
-import { LucideAngularModule } from 'lucide-angular';
 
 import { SelectDropdownService } from './select-dropdown.service';
 
@@ -33,7 +33,7 @@ export type SelectSize = 'sm' | 'md' | 'lg';
   templateUrl: './select.component.html',
   styleUrl: './select.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [LucideAngularModule],
+  imports: [LucideDynamicIcon],
   providers: [
     SelectDropdownService,
     {

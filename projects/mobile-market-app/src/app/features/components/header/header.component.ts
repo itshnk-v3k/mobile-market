@@ -7,8 +7,8 @@ import {
   signal,
 } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { LucideDynamicIcon } from '@lucide/angular';
 import { SheetService } from '@shared/components/sheet/sheet.service';
-import { LucideAngularModule } from 'lucide-angular';
 
 import { CartSheetComponent } from './cart-sheet/cart-sheet.component';
 
@@ -29,7 +29,7 @@ const NAV_ITEMS: NavItem[] = [
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, RouterLinkActive, LucideAngularModule],
+  imports: [RouterLink, RouterLinkActive, LucideDynamicIcon],
   host: {
     '[attr.data-scrolled]': 'scrolled() || null',
   },

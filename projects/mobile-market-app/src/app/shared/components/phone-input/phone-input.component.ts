@@ -26,9 +26,9 @@ import {
   NgControl,
 } from '@angular/forms';
 import { COUNTRIES, type Country } from '@core/mocks/countries.mock';
+import { LucideDynamicIcon } from '@lucide/angular';
 import { ValidationErrorMessagesService } from '@shared/services/validation-error-messages.service.ts/validation-error-messages.service.ts.component';
 import { generateId, mergeClasses } from '@shared/utils/merge-classes';
-import { LucideAngularModule } from 'lucide-angular';
 import { NgxMaskDirective } from 'ngx-mask';
 
 type InputStatus = 'base' | 'error';
@@ -44,7 +44,7 @@ function detectCountry(digits: string): Country | null {
   templateUrl: './phone-input.component.html',
   styleUrl: './phone-input.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormsModule, NgxMaskDirective, LucideAngularModule],
+  imports: [FormsModule, NgxMaskDirective, LucideDynamicIcon],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

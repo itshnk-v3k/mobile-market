@@ -10,8 +10,8 @@ import {
 } from '@angular/core';
 import type { ControlValueAccessor } from '@angular/forms';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { LucideDynamicIcon } from '@lucide/angular';
 import { generateId } from '@shared/utils/merge-classes';
-import { LucideAngularModule } from 'lucide-angular';
 
 export type CheckboxSize = 'sm' | 'md' | 'lg';
 export type CheckboxState = 'default' | 'indeterminate';
@@ -28,7 +28,7 @@ const ICON_SIZE: Record<CheckboxSize, number> = {
   templateUrl: './checkbox.component.html',
   styleUrl: './checkbox.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [LucideAngularModule],
+  imports: [LucideDynamicIcon],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

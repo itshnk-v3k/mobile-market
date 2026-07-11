@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { LucideAngularModule } from 'lucide-angular';
+import { LucideDynamicIcon } from '@lucide/angular';
 
 interface FooterLink {
   label: string;
@@ -24,7 +24,7 @@ interface SocialLink {
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, LucideAngularModule],
+  imports: [RouterLink, LucideDynamicIcon],
 })
 export class FooterComponent {
   readonly socials: SocialLink[] = [

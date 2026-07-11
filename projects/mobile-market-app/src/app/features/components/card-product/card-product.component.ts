@@ -9,6 +9,7 @@ import {
   signal,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { LucideDynamicIcon } from '@lucide/angular';
 import { BadgeComponent } from '@shared/components/badge/badge.component';
 import { ButtonComponent } from '@shared/components/button/button.component';
 import { TagComponent } from '@shared/components/tag/tag.component';
@@ -16,7 +17,6 @@ import { PRODUCT_CATEGORY_LABELS, type ProductCardData } from '@shared/models/pr
 import { CompareService } from '@shared/services/compare/compare.service';
 import { FavoritesService } from '@shared/services/favorites/favorites.service';
 import { ToastService } from '@shared/services/toast/toast.service';
-import { LucideAngularModule } from 'lucide-angular';
 
 import { CardProductSkeletonComponent } from './card-product-skeleton/card-product-skeleton.component';
 
@@ -28,7 +28,7 @@ import { CardProductSkeletonComponent } from './card-product-skeleton/card-produ
   imports: [
     RouterLink,
     DecimalPipe,
-    LucideAngularModule,
+    LucideDynamicIcon,
     BadgeComponent,
     ButtonComponent,
     TagComponent,

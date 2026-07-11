@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
+import { LucideDynamicIcon } from '@lucide/angular';
 import { generateId } from '@shared/utils/merge-classes';
-import { LucideAngularModule } from 'lucide-angular';
 
 import type { AccordionComponent } from '../accordion.component';
 
@@ -9,7 +9,7 @@ import type { AccordionComponent } from '../accordion.component';
   templateUrl: './accordion-item.component.html',
   styleUrl: './accordion-item.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [LucideAngularModule],
+  imports: [LucideDynamicIcon],
   host: {
     '[attr.data-state]': "isOpen() ? 'open' : 'closed'",
   },

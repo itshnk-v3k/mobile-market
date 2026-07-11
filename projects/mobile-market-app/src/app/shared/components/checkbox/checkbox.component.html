@@ -10,7 +10,7 @@
     [disabled]="disabledState()"
     (click)="onToggle()">
     @if (isChecked()) {
-      <lucide-icon [name]="iconName()" [size]="iconSize()" />
+      <svg [lucideIcon]="iconName()" [size]="iconSize()" />
     }
   </button>
 
