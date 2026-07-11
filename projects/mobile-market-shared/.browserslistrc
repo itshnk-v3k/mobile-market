@@ -1,0 +1,5 @@
+# The shared library ships framework-standard ESM (ng-packagr) and is consumed by
+# the app/admin, which apply their own browser matrix. Its own build/test bundle
+# only needs a modern target (top-level await support in the unit-test harness),
+# so it does NOT inherit the root .browserslistrc's older Safari/iOS floor.
+defaults
