@@ -46,3 +46,4 @@ Thumbs.db
 # Reference-only sibling project (NEOMATTEN) — architecture reference, never
 # part of Mobile Market. Must never be tracked, built, or committed here.
 /neomatten-example-for-mm/
+MOBILE_MARKET_ARCHITECTURE_REFERENCE.md
