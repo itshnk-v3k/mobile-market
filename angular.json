@@ -257,6 +257,15 @@
           "options": {
             "tsConfig": "projects/mobile-market-shared/tsconfig.spec.json"
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/mobile-market-shared/src/**/*.ts",
+              "projects/mobile-market-shared/src/**/*.html"
+            ]
+          }
         }
       }
     }
