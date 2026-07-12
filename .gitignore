@@ -47,3 +47,7 @@ Thumbs.db
 # part of Mobile Market. Must never be tracked, built, or committed here.
 /neomatten-example-for-mm/
 MOBILE_MARKET_ARCHITECTURE_REFERENCE.md
+
+# Claude Code / AI assistant local files
+.claude/
+CLAUDE.md
